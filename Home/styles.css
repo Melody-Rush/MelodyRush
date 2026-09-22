@@ -1,15 +1,20 @@
 /*Menu de arriba*/
 body{
-    margin: 0;
+    margin: 0px;
     font-family: Arial, Helvetica, sans-serif;
 }
 .encabezado{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 40px;
-    background-color: white;
-    border-bottom: 1px ;
+    padding: 28px 40px;
+    background-color: #dddddd;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+}
+.logo{
+    display: flex;
+    align-items: center;
 }
 .logo h2{
     margin: 0;
@@ -17,6 +22,7 @@ body{
 .menu{
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 .menu a{
     text-decoration: none;
@@ -26,13 +32,15 @@ body{
     color:gray
 }
 .carrito{
-    font-size: 16px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
 }
 /*Menu de abajo*/
 .acceso{
     text-align: right;
-    padding: 10px 40px;
-    border-bottom: 1px solid #dddddd;
+    padding: 40px 40px 10px 40px;
+    
 }
 .acceso a{
     text-decoration: none;
@@ -43,22 +51,25 @@ body{
     color: gray;
 }
 /*IMAGEN PRINCIPAL*/
-.banner{
+.home{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 50px 40px;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 18px 35px;
     background-color:#dddddd;
+    box-sizing: border-box;
 }
-.banner-texto{
+.home-texto{
     width: 45%;
     font-family:cursive;
 }
-.banner-texto h1{
+.home-texto h1{
     font-size: 40px;
     margin-bottom: 15px;
 }
-.banner-texto p{
+.home-texto p{
     font-size: 18px;
     line-height: 1.5;
     margin-bottom: 25px;
@@ -79,19 +90,20 @@ body{
 .boton-productos:hover{
     background-color: rgba(128, 128, 128, 0.151);
 }
-.banner-imagen{
-    width: 48%;
+.principal-imagen{
+    width: 50%;
+    height: 225%;
 }
-.banner-imagen img{
+.principal-imagen img{
     width: 100%;
-    height: 230px;
+    height: 220px;
     object-fit: contain;
     display: block;
     
 }
 /*PRODUCTOS DESTACADOS*/
 .productos{
-    padding: 50px 40px;
+    padding: 50px 20px;
     text-align: center;
 }
 .productos h2{
@@ -101,28 +113,40 @@ body{
 .contenedor-productos{
     display:grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
+    gap: 20px;
+    padding: 0 40px 40px;
 }
 .producto{
-    border: 1px;
-    padding: 15px;
-    border-radius: 8px;
+    border: 1px solid #dddddd;
+    padding: 10px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    min-height: 210px;
     background-color: #dddddd;
 }
 .producto img{
     width: 100%;
-    height: 200px;
+    height: 125px;
     object-fit: contain;
     border-radius: 5px;
+    border: 1px solid #dddddd;
 }
-.producto h3{
-    margin: 15px 0 5px;
+.productoti{
+    text-align: center;
+    margin: 10px 0 15px 0;
+    font-size: 12px;
+    color: #4088ec;
+    text-decoration: none;
 }
-.producto p{
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0;
+.info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: black;
 }
+
 /*FOOTER*/
 .footer{
     display: flex;
@@ -213,4 +237,64 @@ body{
     font-size: 11px;
     font-weight: bold;
     cursor: pointer;
+}
+
+/*PAG DE REGISTRO de USUARIO*/
+.registro{
+    min-height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+.formulario{
+    width: 300px;
+    padding: 12px 25px 25px 25px;
+    background-color: #eeeeee;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+}
+.formulario h3{
+    margin: 0 0 12px 0;
+    padding: 7px;
+    background-color:#cccccc;
+    font-size: 12px;
+}
+.formulario label{
+    font-size: 9px;
+    margin-top: 7px;
+    margin-bottom: 2px;
+}
+.formulario input{
+    height: 20px;
+    border: 2px solid black;
+    padding: 2px 5px;
+    box-sizing: border-box;
+}
+.ubicacion{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 30px;
+}
+.ubicacion div{
+    width: 50%;
+}
+.ubicacion select{
+    width: 100%;
+    height: 24px;
+    font-size: 9px;
+    border: 2px solid black;
+    background-color: white;
+    box-sizing: border-box;
+}
+.boton-registro{
+    width: 90px;
+    height: 30px;
+    margin: 100px auto 0 auto;
+    background-color: white;
+    border: 2px solid black;
+    font-size: 9px;
+    cursor:pointer;
 }

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de usuario</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="encabezado">
+        <div class="logo">
+            <h2>Melody Rush</h2>
+        </div>
+        <nav class="menu">
+            <a href="index.html">Home</a>
+            <span>|</span>
+            <a href="#">Productos</a>
+            <span>|</span>
+            <a href="#">Nosotros</a>
+            <span>|</span>
+            <a href="#">Blog</a>
+            <span>|</span>
+            <a href="#">Contacto</a>
+        </nav>
+        <div class="carrito">
+            🛒 cart (0)
+        </div>
+    </header>
+
+    <main class="registro">
+        <form class="formulario">
+            <h3>Registro de usuario</h3>
+            <label for="nombre">NOMBRE COMPLETO</label>
+            <input type="text" id="nombre" name="nombre">
+
+            <label for="correo">CORREO</label>
+            <input type="email" id="correo" name="correo">
+
+            <label for="correo2">CORREO</label>
+            <input type="email" id="correo2" name="correo2">
+
+            <label for="password">CONTRASEÑA</label>
+            <input type="password" id="password" name="password">
+
+            <label for="confirmar">CONFIRMAR CONTRASEÑA</label>
+            <input type="password" id="confirmar" name="confirmar">
+
+            <label for="telefono">TELEFONO (opcional)</label>
+            <input type="tel" id="telefono" name="telefono">
+
+            <div class="ubicacion">
+                <div>
+                    <select id="region">
+                        <option>-- Seleccione la región --</option>
+                        <option>Región Metropolitana de Santiago</option>
+                        <option>Región de la Araucanía</option>
+                        <option>Región de Ñuble</option>
+                    </select>
+                </div>
+
+                <div>
+                    <select id="comuna">
+                        <option>-- Seleccione la comuna --</option>
+                        <option>Linares</option>
+                        <option>Longaví</option>
+                        <option>Concepción</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="boton-registro" type="submit">
+                REGISTRAR
+            </button>
+        </form>
+    </main>
+</body>
+</html>
