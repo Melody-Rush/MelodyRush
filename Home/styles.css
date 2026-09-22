@@ -298,3 +298,68 @@ body{
     font-size: 9px;
     cursor:pointer;
 }
+/*PAG DE LOGIN*/
+.login{
+    min-height: 650px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 25px;
+    background-color: #ffffff;
+}
+.logo{
+    width: 130px;
+    height: 70px;
+    background-color: #dddddd;
+}
+.logo img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+.nombremp{
+    margin: 25px 0 25px 0;
+    font-size: 22px;
+    font-weight: normal;
+    font-family:Arial, Helvetica, sans-serif;
+}
+.formulario-login{
+    width: 420px;
+    background-color: #eeeeee;
+    border: 2px solid black;
+    padding: 0 4px 30px 4px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+.titulo-login{
+    background-color: #cccccc;
+    padding: 12px;
+    margin: 0 0 20px 0;
+    font-size: 10px;
+}
+.campos{
+    padding: 0 20px;
+}
+.formulario-login label {
+    margin-top: 10px;
+    margin-bottom: 6px;
+    font-size: 9px;
+}
+.formulario-login input{
+    width: 100%;
+    height: 28px;
+    border: 2px solid black;
+    background-color: white;
+    box-sizing: border-box;
+}
+.boton-login{
+    width: 155px;
+    height: 80px;
+    margin: 30px auto 0 auto;
+    background-color: white;
+    border: 2px solid black;
+    font-size: 9px;
+    cursor: pointer;
+}
