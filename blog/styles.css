@@ -1,0 +1,72 @@
+H1{
+    text-align: center;
+}
+.contenedor-pagina{
+    display: flex;
+}
+.centrar-body{
+    flex-grow: 1;
+    padding: 20px;
+}
+.contenedor-blog{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+}
+.blog{
+    background-color: #acacac;
+    padding: 20px;
+    width: 1000px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 40px;
+}
+.contenedor-texto{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+}
+.imagen-blog{
+    border: 2px solid black;
+    width: 500px;
+    height: 250px;
+    background-color: #ffffff;
+    flex-shrink: 0;
+}
+.boton-caso {
+    padding: 10px 40px;
+    gap: 40px;
+    border: 2px solid black;
+    background: white;
+    flex-direction: bottom;
+    cursor: pointer;
+    margin-top: auto;
+}
+/*sector del header*/
+.encabezado{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background-color: #acacac;
+    border-bottom: 1px ;
+}
+.logo h2{
+    margin: 0;
+}
+.menu{
+    display: flex;
+    gap: 10px;
+}
+.menu a{
+    text-decoration: none;
+    color: #125a98;
+}
+.carrito{
+    font-size: 16px;
+}
