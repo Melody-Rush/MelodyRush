@@ -32,17 +32,21 @@
     <main class="registro">
         <form class="formulario" id="formRegistro" novalidate>
             <h3>Registro de usuario</h3>
-            <label for="nombreRegistro">NOMBRE COMPLETO</label>
-            <input type="text" id="nombreRegistro" name="nombre">
+            <label for="runRegistro">RUN</label>
+            <input type="text" id="runRegistro" name="run">
+            <small class="mserror" id="errorRunRegistro"></small>
 
-            <label for="correoRegistro">CORREO</label>
-            <input type="email" id="correoRegistro" name="correo">
+            <label for="nombreRegistro">NOMBRE</label>
+            <input type="text" id="nombreRegistro" name="name">
+            <small class="mserror" id="errorNombreRegistro"></small>
 
-            <label for="correo2">CORREO</label>
-            <input type="email" id="correo2" name="correo2">
+            <label for="apellidosRegistro">APELLIDOS</label>
+            <input type="text" id="apellidosRegistro" name="apellidos">
+            <small class="mserror" id="errorApellidosRegistros"></small>
 
-            <label for="password">CONTRASEÑA</label>
-            <input type="password" id="password" name="password">
+            <label for="fechaRegistro">FECHA DE NACIMIENTO</label>
+            <input type="date" id="fechaRegistro" name="fechaNacimiento">
+            <small class="mserror" id="errorFechaRegistro"></small>
 
             <label for="confirmar">CONFIRMAR CONTRASEÑA</label>
             <input type="password" id="confirmar" name="confirmar">
