@@ -3,31 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
+    <title>Productos - Melody Rush</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div class="logo">Melody-Rush</div>
-        <nav>
-            <a href="index.html">Home</a>
+    <header class="encabezado">
+        <div class="logo">
+            <h2>Melody Rush</h2>
+        </div>
+        <nav class="menu">
+            <a href="../Home/index.html">Home</a>
+            <span>|</span>
             <a href="productos.html">Productos</a>
-            <a href="nosotros.html">Nosotros</a>
-            <a href="noticias.html">Blogs</a>
-            <a href="contacto.html">Contacto</a>
+            <span>|</span>
+            <a href="../Home/nosotros.html">Nosotros</a>
+            <span>|</span>
+            <a href="../blog/noticias.html">Blogs</a>
+            <span>|</span>
+            <a href="../Home/contacto.html">Contacto</a>
         </nav>
-        <div class="cart">🛒 Carrito (<span id="cart-count">0</span>)</div>
+        <div class="carrito">
+            🛒 cart (<span id="cart-count">0</span>)
+        </div>
     </header>
 
     <main>
         <h1 class="text-center">PRODUCTOS</h1>
-        <!-- Aquí se inyectarán los productos desde JavaScript -->
         <div class="grid-productos" id="contenedor-productos">
-            <!-- Productos cargados por JS -->
+            <!-- Aquí se inyectarán los productos con JavaScript -->
         </div>
     </main>
 
-    <script src="productos.js"></script>
-    <script src="carrito-global.js"></script>
+    <!-- Apunta a script.js que es el archivo real en tu carpeta -->
+    <script src="script.js"></script>
 </body>
 </html>
