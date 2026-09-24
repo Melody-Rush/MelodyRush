@@ -365,3 +365,12 @@ body{
     font-size: 9px;
     cursor: pointer;
 }
+/*MENSAJE DE ERROR*/
+.mserror{
+    display: block;
+    min-height: 15px;
+    margin-top: 4px;
+    margin-bottom: 5px;
+    font-size: 10px;
+    color: #b00020;
+}

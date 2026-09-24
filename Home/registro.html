@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de usuario</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="js/script.js" defer></script>
+    <script src="js/login.js" defer></script>
 </head>
 <body>
     <header class="encabezado">
@@ -28,13 +30,13 @@
     </header>
 
     <main class="registro">
-        <form class="formulario">
+        <form class="formulario" id="formRegistro" novalidate>
             <h3>Registro de usuario</h3>
-            <label for="nombre">NOMBRE COMPLETO</label>
-            <input type="text" id="nombre" name="nombre">
+            <label for="nombreRegistro">NOMBRE COMPLETO</label>
+            <input type="text" id="nombreRegistro" name="nombre">
 
-            <label for="correo">CORREO</label>
-            <input type="email" id="correo" name="correo">
+            <label for="correoRegistro">CORREO</label>
+            <input type="email" id="correoRegistro" name="correo">
 
             <label for="correo2">CORREO</label>
             <input type="email" id="correo2" name="correo2">

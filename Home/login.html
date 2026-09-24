@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de sesión</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="js/script.js" defer></script>
+    <script src="js/login.js" defer></script>
 </head>
 <body>
     <header class="encabezado">
@@ -31,17 +33,19 @@
         <div class="logo">
             <img src="img/imgblanco.png" alt="Logo de la empresa">
         </div>
-        <h1 class="nombremp">nombre empresa</h1>
-        <form class="formulario-login">
+        <h1 class="nombremp">Melody Rush</h1>
+        <form class="formulario-login" id="formLogin" novalidate>
             <div class="titulo-login">
                 Inicio de sesión
             </div>
             <div class="campos">
-                <label for="correo">CORREO</label>
-                <input type="email" id="correo" name="correo">
+                <label for="correoLogin">CORREO</label>
+                <input type="email" id="correoLogin" name="correo">
+                <small class="mserror" id="errorCorreoLogin"></small>
 
-                <label for="contrasena">CONTRASEÑA</label>
-                <input type="password" id="contrasena" name="contrasena">
+                <label for="contrasenaLogin">CONTRASEÑA</label>
+                <input type="password" id="contrasenaLogin" name="contrasena">
+                <small class="mserror" id="errorContrasenaLogin"></small>
             </div>
             
             <button type="submit" class="boton-login">
