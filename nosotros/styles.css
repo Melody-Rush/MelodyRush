@@ -20,6 +20,19 @@ body {
     z-index: 1000;
 }
 
+/* Contenedor del logo alineado horizontalmente */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre la imagen y el texto */
+}
+
+/* Control del tamaño de la imagen */
+.logo img {
+    height: 38px; /* Ajusta este valor si lo quieres más grande o pequeño */
+    width: auto;  /* Mantiene la proporción sin deformarse */
+    object-fit: contain;
+}
 .logo h2 {
     margin: 0;
     font-size: 24px;
