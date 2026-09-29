@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - Melody Rush</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="js/script.js" defer></script>
+    <script src="js/registro.js" defer></script>
 </head>
 <body>
 
     <!-- ENCABEZADO -->
     <header class="encabezado">
-          <div class="logo">
-                <img src="../Home/img/Melody Rush.png" alt="Logo Melody Rush"> 
-        <h2>Melody <span>Rush</span></h2>
+        <div class="logo">
+            <h2>Melody Rush</h2>
         </div>
         <nav class="menu">
-            <a href="../Home/index.html">Home</a>
+            <a href="index.html">Home</a>
             <a href="../Productos/productos.html">Productos</a>
-            <a href="../Contactanos/contacto.html">Nosotros</a>
+            <a href="../nosotros/nosotros.html">Nosotros</a>
             <a href="../blog/noticias.html">Blogs</a>
             <a href="../Contactanos/contacto.html">Contacto</a>
         </nav>
@@ -28,85 +29,65 @@
     </header>
 
     <!-- FORMULARIO DE REGISTRO -->
-    <main class="auth-wrapper">
-        <div class="auth-card wide">
-            <h1 class="auth-title">Crear Cuenta</h1>
-            <p class="auth-subtitle">Completa tus datos para registrarte</p>
-
+    <main class="registro">
+            
             <!-- novalidate evita los avisos feos por defecto del navegador -->
-            <form id="form-registro" novalidate>
-                <div class="form-grid">
+            <form class="formulario-registro" id="formRegistro" novalidate>
+                <h3>Registro de usuario</h3>
+
+                <label for="runRegistro">RUN</label>
+                <input type="text" id="runRegistro" name="run" placeholder="12345678-K">
+                <small class="mserror" id="errorRunRegistro"></small>
+
+                <label for="nombreRegistro">Nombre</label>
+                <input type="text" id="nombreRegistro" name="nombre" placeholder="Tu nombre">
+                <small class="mserror" id="errorNombreRegistro"></small>
                     
-                    <div class="form-group">
-                        <label for="run">RUN</label>
-                        <input type="text" id="run" placeholder="12345678-K">
-                        <span class="error-msg" id="err-run"></span>
-                    </div>
+                <label for="apellidosRegistro">Apellidos</label>
+                <input type="text" id="apellidosRegistro" name="apellidos" placeholder ="Tus apellidos">
+                <small class="mserror" id="errorApellidosRegistro"></small>
 
-                    <div class="form-group">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" placeholder="Tu nombre">
-                        <span class="error-msg" id="err-nombre"></span>
-                    </div>
+                <label for="correoRegistro">Correo Electrónico</label>
+                <input type="email" id="correoRegistro" name="correo" placeholder="correo@duoc.cl">
+                <small class="mserror" id="errorCorreoRegistro"></small>
+                    
+                <label for="fechaRegistro">Fecha de Nacimiento</label>
+                <input type="date" id="fechaRegistro" name="fechaNacimiento">
+                <small class="mserror" id="errorFechaRegistro"></small>
+                    
+                <label for="telefonoRegistro">Teléfono (opcional)</label>
+                <input type="tel" id="telefonoRegistro" name="telefono" placeholder="+56 9 1234 5678">
+                <small class="mserror" id="errorTelefonoRegistro"></small>
 
-                    <div class="form-group">
-                        <label for="apellidos">Apellidos</label>
-                        <input type="text" id="apellidos" placeholder="Tus apellidos">
-                        <span class="error-msg" id="err-apellidos"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="fecha-nac">Fecha de Nacimiento</label>
-                        <input type="date" id="fecha-nac">
-                        <span class="error-msg" id="err-fecha-nac"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="correo-reg">Correo Electrónico</label>
-                        <input type="email" id="correo-reg" placeholder="correo@duoc.cl">
-                        <span class="error-msg" id="err-correo-reg"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="telefono">Teléfono (opcional)</label>
-                        <input type="tel" id="telefono" placeholder="+56 9 1234 5678">
-                        <span class="error-msg" id="err-telefono"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="region">Región</label>
-                        <select id="region">
+                <label for="passwordRegistro">Contraseña</label>
+                <input type="password" id="passwordRegistro" name="password" placeholder="••••••••">
+                <small class="mserror" id="errorPasswordRegistro"></small>
+                    
+                <label for="confirmarRegistro">Confirmar Contraseña</label>
+                <input type="password" id="confirmarRegistro" name="confirmar" placeholder="••••••••">
+                <small class="mserror" id="errorConfirmarRegistro"></small>
+                
+                <div class="ubicacion">
+                    <div>
+                        <label for="regionRegistro">Región</label>
+                        <select id="regionRegistro" name="region">
                             <option value="">-- Seleccione la región --</option>
                             <option value="rm">Región Metropolitana</option>
                             <option value="valparaiso">Valparaíso</option>
                             <option value="biobio">Biobío</option>
                         </select>
-                        <span class="error-msg" id="err-region"></span>
+                        <small class="mserror" id="errorRegionRegistro"></small>
                     </div>
-
-                    <div class="form-group">
-                        <label for="comuna">Comuna</label>
-                        <select id="comuna">
+                    <div>
+                        <label for="comunaRegistro">Comuna</label>
+                        <select id="comunaRegistro" name="comuna">
                             <option value="">-- Seleccione la comuna --</option>
                             <option value="santiago">Santiago</option>
                             <option value="providencia">Providencia</option>
                             <option value="maipu">Maipú</option>
                         </select>
-                        <span class="error-msg" id="err-comuna"></span>
+                        <small class="mserror" id="errorComunaRegistro"></small>
                     </div>
-
-                    <div class="form-group">
-                        <label for="password-reg">Contraseña</label>
-                        <input type="password" id="password-reg" placeholder="••••••••">
-                        <span class="error-msg" id="err-password-reg"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="confirm-password">Confirmar Contraseña</label>
-                        <input type="password" id="confirm-password" placeholder="••••••••">
-                        <span class="error-msg" id="err-confirm-password"></span>
-                    </div>
-
                 </div>
 
                 <button type="submit" class="btn-auth">REGISTRAR</button>
@@ -115,7 +96,6 @@
                     ¿Ya tienes una cuenta? <a href="login.html">Inicia sesión</a>
                 </div>
             </form>
-        </div>
     </main>
 
     <!-- FOOTER -->
@@ -129,8 +109,7 @@
             <p class="textonews">Stay in Touch!</p>
         </div>
     </footer>
-
-    <script src="js/script.js"></script>
 </body>
 </html>
+
 

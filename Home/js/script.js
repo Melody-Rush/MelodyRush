@@ -1,10 +1,12 @@
 /* FUNCIONES GENERALES DE VALIDACION */
 
-function mostrarError(elemento, mensaje){   //mostrar un mensaje de error
-    elemento.textContent=mensaje;
+function mostrarError(inputElemento, spanError, mensaje){   //mostrar un mensaje de error
+    inputElemento.classList.add("input-error");
+    spanError.textContent = `⚠️ ${mensaje}`;
 }
-function limpiarError(elemento){            //limpiar mensaje de error
-    elemento.textContent="";
+function limpiarError(inputElemento, spanError){     
+    inputElemento.classList.remove("input-error");       //limpiar mensaje de error
+    spanError.textContent="";
 }
 function estaVacio(valor){                  //para ver si un campo de text esta vacio
     return valor.trim() === "";
@@ -20,6 +22,8 @@ function correoPermitido(correo){
     const patronCorreo= /^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i;
     return patronCorreo.test(correo);
 }
+
+
 
 const productos = [
     { id: 1, nombre: "Baby Album", precio: 15000, imagen: "baby.webp" },
