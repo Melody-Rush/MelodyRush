@@ -1,13 +1,17 @@
 // Arreglo de productos usando las imágenes de tu carpeta Home/img
 const productos = [
-    { id: 1, nombre: "Baby Album", precio: 15000, imagen: "../Home/img/baby.webp" },
+    { id: 1, nombre: "Baby Metal", precio: 15000, imagen: "../Home/img/baby.webp" },
     { id: 2, nombre: "Daft Punk", precio: 25000, imagen: "../Home/img/daft.webp" },
     { id: 3, nombre: "Post Malone", precio: 18000, imagen: "../Home/img/post.webp" },
-    { id: 4, nombre: "Falling Album", precio: 12000, imagen: "../Home/img/Falling.webp" },
+    { id: 4, nombre: "Falling In Reverse", precio: 12000, imagen: "../Home/img/Falling.webp" },
     { id: 5, nombre: "Olivia Rodrigo", precio: 22000, imagen: "../Home/img/olivia.webp" },
     { id: 6, nombre: "Michael Jackson", precio: 30000, imagen: "../Home/img/michael.webp" },
     { id: 7, nombre: "Guns N' Roses", precio: 28000, imagen: "../Home/img/guns.webp" },
-    { id: 8, nombre: "Linkin Park", precio: 20000, imagen: "../Home/img/linkin1.webp" }
+    { id: 8, nombre: "Linkin Park", precio: 20000, imagen: "../Home/img/linkin1.webp" },
+    { id: 9, nombre: "Red Hot Chili Peppers",  precio: 18000, imagen: "../Home/img/redhot.webp"},
+    { id: 10, nombre: "The Weekend", precio: 21000, imagen: "../Home/img/the_weeknd.webp"},
+    { id: 11, nombre: "Creedence Clearwater", precio: 23000, imagen: "../Home/img/the_creedence.jpg"},
+    { id: 12, nombre: "Three Days Grace", precio: 16000, imagen: "../Home/img/three_days.webp"}
 ];
 
 function renderizarProductos() {
