@@ -1,0 +1,32 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #f0f0f0;
+}
+
+
+/*sector del header*/
+.encabezado{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background-color: #8f7dba;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+}
+.logo h2{
+    margin: 0;
+}
+.menu{
+    display: flex;
+    gap: 10px;
+}
+.menu a{
+    text-decoration: none;
+    color: black;
+}
+.carrito{
+    font-size: 16px;
+}
