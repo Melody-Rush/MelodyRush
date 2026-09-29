@@ -8,20 +8,14 @@
 </head>
 <body>
     <!-- ENCABEZADO -->
-    <header class="encabezado">
+   <header class="encabezado">
         <div class="logo">
             <h2>Melody Rush</h2>
         </div>
         <nav class="menu">
-            <a href="index.html" class="active">Home</a>
+            <a href="index.html">Home</a>
             <a href="../Productos/productos.html">Productos</a>
-<<<<<<< HEAD
             <a href="nosotros.html">Nosotros</a>
-=======
-            <span>|</span>
-            <a href="../nosotros/nosotros.html">Nosotros</a>
-            <span>|</span>
->>>>>>> 71cbfb89e66a46e9e6795bc2f6fa6d4709a9ffb2
             <a href="../blog/noticias.html">Blogs</a>
             <a href="contacto.html">Contacto</a>
         </nav>
@@ -38,25 +32,25 @@
         <a href="registro.html">Registrarse</a>
     </div>
 
+    
     <!-- BANNER PRINCIPAL (EL CUADRADO DESTACADO) -->
     <section class="home">
         <div class="home-texto">
             <h1>TIENDA ONLINE</h1>
             <p>Encuentra lo que buscas....</p>
-            <a href="../Productos/productos.html" class="boton-productos">⩢ ver productos</a>
+            <a href="Productos/productos.html" class="boton-productos">⩢ ver productos</a>
         </div>
         <div class="principal-imagen">
-            <!-- Recuerda verificar que la ruta de la imagen sea la correcta en tu carpeta -->
             <img src="img/soda.webp" alt="Imagen principal"> 
         </div>
     </section>
 
-    <!-- SECCIÓN DE PRODUCTOS (CON LA CLASE CORRECTA PARA TU JS) -->
+    <!-- SECCIÓN DE PRODUCTOS DESTACADOS -->
     <section class="productos">
         <h2 class="text-center">PRODUCTOS DESTACADOS</h2>
-        <!-- Se incluye la clase contenedor-productos para que tu script lo encuentre y los dibuje -->
+        <!-- El JS inyecta los productos en este div -->
         <div class="grid-productos contenedor-productos" id="contenedor-productos">
-            <!-- Tu script.js inyectará los productos aquí -->
+            <!-- Se carga desde script.js -->
         </div>
     </section>
     
@@ -73,11 +67,11 @@
             </div>
 
             <div class="categorias-footer">
-                <a href="#">Categoria X</a>
+                <a href="#">Álbumes</a>
                 <span>|</span>
-                <a href="#">Categoria Y</a>
+                <a href="#">Vinilos</a>
                 <span>|</span>
-                <a href="#">Categoria Z</a>
+                <a href="#">Ofertas</a>
             </div>
         </div>
         <div class="footer-der">
@@ -89,6 +83,7 @@
         </div>
     </footer>
 
+    <!-- Script en la carpeta JS -->
     <script src="js/script.js"></script>
 </body>
 </html>
