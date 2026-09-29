@@ -1,59 +1,49 @@
-const formularioLogin=document.getElementById("formLogin"); // p/ llamar al formulario
-
-const correoLogin=document.getElementById("correoLogin"); //llamar los campos
-const contrasenaLogin=document.getElementById("contrasenaLogin"); //campo
-
-const errorCorreoLogin=document.getElementById("errorCorreoLogin"); //espacio para errores
-const errorContrasenaLogin=document.getElementById("errorContrasenaLogin"); //error
-
-//para validar correo
-function validarCorreoLogin(){
-    const correo=correoLogin.value.trim();
-    if(estaVacio(correo)) {
-        mostrarError(errorCorreoLogin, "El correo es OBLIGATORIO.");
-        return false;
-    }
-    if(superaMaximo(correo, 100)) {
-        mostrarError(
-            errorCorreoLogin, "El correo no puede superar los 100 caracteres. ");
-            return false;
-    }
-    if(!correoPermitido(correo)) {
-        mostrarError(errorCorreoLogin, "Solo se permiten correos @duoc.cl, @profesor.duoc.cl ó @gmail.com");
-        return false;
-    }
-    limpiarError(errorCorreoLogin);
-    return true;
+// Funciones de ayuda visual
+function mostrarError(inputElemento, spanError, mensaje) {
+    inputElemento.classList.add('input-error'); // Pinta el cuadradito de rojo
+    spanError.textContent = `⚠️ ${mensaje}`;    // Pone el mensaje rojo con icono abajo
 }
 
-//validar contraseña
-function validarContrasenaLogin() {
-    const contrasena=contrasenaLogin.value;
-
-    if(estaVacio(contrasena)) {
-        mostrarError(errorContrasenaLogin, "La contraseña es OBLIGATORIA. ");
-        return false;
-    }
-    if(!longitudEntre(contrasena, 4, 10)) {
-        mostrarError(
-            errorContrasenaLogin, "La contraseña debe tener entre 4 y 10 caracteres.");
-            return false;
-    }
-    limpiarError(errorContrasenaLogin);
-    return true;
+function limpiarError(inputElemento, spanError) {
+    inputElemento.classList.remove('input-error');
+    spanError.textContent = '';
 }
 
-//para validar en tiempo real
-correoLogin.addEventListener("input", validarCorreoLogin);
-contrasenaLogin.addEventListener("input", validarContrasenaLogin);
+// Ejemplo de validación para el Login
+const formLogin = document.getElementById('form-login');
 
-//validar con botn
-formularioLogin.addEventListener("submit", function(event) {
-    event.preventDefault();
+if (formLogin) {
+    formLogin.addEventListener('submit', function (e) {
+        e.preventDefault(); // Evita que se recargue la página o salgan carteles nativos
 
-    const correoValido=validarCorreoLogin();
-    const contrasenaValida=validarContrasenaLogin();
-    if(correoValido && contrasenaValida) {
-        alert("Datos ingresados correctamente. ");
-    }
-});
+        const correoInput = document.getElementById('correo');
+        const errCorreo = document.getElementById('err-correo');
+        const valorCorreo = correoInput.value.trim();
+
+        // 1. Validar que no esté vacío
+        if (estaVacio(valorCorreo)) {
+            mostrarError(correoInput, errCorreo, "El correo no puede estar vacío.");
+            return;
+        }
+
+        // 2. Validar que tenga '@' y un dominio válido
+        if (!valorCorreo.includes('@')) {
+            mostrarError(correoInput, errCorreo, "Debe incluir un '@' en la dirección de correo.");
+            return;
+        }
+
+        if (!correoPermitido(valorCorreo)) {
+            mostrarError(correoInput, errCorreo, "Dominio no permitido (ej: @duoc.cl, @gmail.com).");
+            return;
+        }
+
+        // Si todo está bien:
+        limpiarError(correoInput, errCorreo);
+        alert("¡Inicio de sesión exitoso!");
+    });
+
+    // Limpia el error rojo automáticamente cuando el usuario empieza a escribir de nuevo
+    document.getElementById('correo')?.addEventListener('input', function() {
+        limpiarError(this, document.getElementById('err-correo'));
+    });
+}

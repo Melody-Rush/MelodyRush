@@ -7,133 +7,58 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- ENCABEZADO -->
     <header class="encabezado">
         <div class="logo">
             <h2>Melody Rush</h2>
         </div>
         <nav class="menu">
-            <a href="index.html">Home</a>
-            <span>|</span>
+            <a href="index.html" class="active">Home</a>
             <a href="../Productos/productos.html">Productos</a>
-            <span>|</span>
             <a href="nosotros.html">Nosotros</a>
-            <span>|</span>
             <a href="../blog/noticias.html">Blogs</a>
-            <span>|</span>
             <a href="contacto.html">Contacto</a>
         </nav>
         <div class="carrito">
-            🛒 cart (<span id="cart-count">0</span>)
+            🛒 <span>Carrito</span>
+            <span class="badge" id="cart-count">0</span>
         </div>
     </header>
 
+    <!-- ACCESO LOGIN / REGISTRO -->
     <div class="acceso">
         <a href="login.html">Iniciar sesión</a>
         <span>|</span>
         <a href="registro.html">Registrarse</a>
     </div>
 
+    <!-- BANNER PRINCIPAL (EL CUADRADO DESTACADO) -->
     <section class="home">
         <div class="home-texto">
             <h1>TIENDA ONLINE</h1>
             <p>Encuentra lo que buscas....</p>
-            <a href="../Productos/productos.html" class="boton-productos"> ⩢ ver productos</a>
+            <a href="../Productos/productos.html" class="boton-productos">⩢ ver productos</a>
         </div>
         <div class="principal-imagen">
-            <img src="img/soda.webp" alt="Imagen principal">
+            <!-- Recuerda verificar que la ruta de la imagen sea la correcta en tu carpeta -->
+            <img src="img/soda.webp" alt="Imagen principal"> 
         </div>
     </section>
 
+    <!-- SECCIÓN DE PRODUCTOS (CON LA CLASE CORRECTA PARA TU JS) -->
     <section class="productos">
-        <div class="grid-productos contenedor-productos">
-            
-            <div class="producto tarjeta-producto">
-                <img src="img/baby.webp" alt="Baby Album">
-                <a href="#" class="productoti">Baby Album</a>
-                <div class="info">
-                    <span>Álbum</span>
-                    <span>$15.000</span>
-                </div>
-                <button onclick="agregarAlCarrito(1)">Añadir al carrito</button>
-            </div>
-
-            <div class="producto tarjeta-producto">
-                <img src="img/daft.webp" alt="Daft Punk">
-                <a href="#" class="productoti">Daft Punk</a>
-                <div class="info">
-                    <span>Álbum</span>
-                    <span>$25.000</span>
-                </div>
-                <button onclick="agregarAlCarrito(2)">Añadir al carrito</button>
-            </div>
-
-            <div class="producto tarjeta-producto">
-                <img src="img/post.webp" alt="Post Malone">
-                <a href="#" class="productoti">Post Malone</a>
-                <div class="info">
-                    <span>Álbum</span>
-                    <span>$18.000</span>
-                </div>
-                <button onclick="agregarAlCarrito(3)">Añadir al carrito</button>
-            </div>
-
-            <div class="producto tarjeta-producto">
-                <img src="img/Falling.webp" alt="Falling Album">
-                <a href="#" class="productoti">Falling Album</a>
-                <div class="info">
-                    <span>Álbum</span>
-                    <span>$12.000</span>
-                </div>
-                <button onclick="agregarAlCarrito(4)">Añadir al carrito</button>
-            </div>
-
-            <div class="producto tarjeta-producto">
-                <img src="img/olivia.webp" alt="Olivia Rodrigo">
-                <a href="#" class="productoti">Olivia Rodrigo</a>
-                <div class="info">
-                    <span>Álbum</span>
-                    <span>$22.000</span>
-                </div>
-                <button onclick="agregarAlCarrito(5)">Añadir al carrito</button>
-            </div>
-
-            <div class="producto tarjeta-producto">
-                <img src="img/michael.webp" alt="Michael Jackson">
-                <a href="#" class="productoti">Michael Jackson</a>
-                <div class="info">
-                    <span>Álbum</span>
-                    <span>$30.000</span>
-                </div>
-                <button onclick="agregarAlCarrito(6)">Añadir al carrito</button>
-            </div>
-
-            <div class="producto tarjeta-producto">
-                <img src="img/guns.webp" alt="Guns N' Roses">
-                <a href="#" class="productoti">Guns N' Roses</a>
-                <div class="info">
-                    <span>Álbum</span>
-                    <span>$28.000</span>
-                </div>
-                <button onclick="agregarAlCarrito(7)">Añadir al carrito</button>
-            </div>
-
-            <div class="producto tarjeta-producto">
-                <img src="img/linkin1.webp" alt="Linkin Park">
-                <a href="#" class="productoti">Linkin Park</a>
-                <div class="info">
-                    <span>Álbum</span>
-                    <span>$20.000</span>
-                </div>
-                <button onclick="agregarAlCarrito(8)">Añadir al carrito</button>
-            </div>
-
+        <h2 class="text-center">PRODUCTOS DESTACADOS</h2>
+        <!-- Se incluye la clase contenedor-productos para que tu script lo encuentre y los dibuje -->
+        <div class="grid-productos contenedor-productos" id="contenedor-productos">
+            <!-- Tu script.js inyectará los productos aquí -->
         </div>
     </section>
     
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-izq">
             <div class="superior-footer">
-                <span class="site">Site Name</span>
+                <span class="site">Melody Rush</span>
                 <div class="pagos">
                     <div class="tarjeta">VISA</div>
                     <div class="tarjeta">MC</div>
@@ -158,6 +83,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
