@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Melody Rush</title>
+    <!-- Asegúrate de que el nombre de tu archivo CSS sea exacto -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- 1. ENCABEZADO Y NAVEGACIÓN (BARRA MORADA) -->
+    <header class="encabezado">
+         <div class="logo">
+            <h2>Melody Rush</h2>
+        </div>
+        <nav class="menu">
+            <a href="../Home/index.html">Home</a>
+            <a href="../Productos/productos.html">Productos</a>
+            <a href="nosotros.html">Nosotros</a>
+            <a href="../blog/noticias.html">Blogs</a>
+            <a href="../Contactanos/contacto.html" class="active">Contacto</a>
+        </nav>
+        <div class="carrito">
+            🛒 <span>Carrito</span>
+            <span class="badge">0</span>
+        </div>
+    </header>
+
+
+    <!-- 3. CONTENIDO PRINCIPAL -->
+    <main class="main-container">
+        <section class="contacto-wrapper">
+            <div class="contacto-header">
+                <span class="contacto-icon">📬</span>
+                <h1>CONTÁCTANOS</h1>
+                <p>¿Tienes dudas o consultas? Escríbenos y te responderemos a la brevedad.</p>
+            </div>
+
+            <form id="form-contacto" class="form-card" novalidate>
+                <h2>FORMULARIO DE CONTACTO</h2>
+                
+                <div class="form-group">
+                    <label for="nombre">NOMBRE COMPLETO *</label>
+                    <input type="text" id="nombre" name="nombre" maxlength="100" placeholder="Ej: Juan Pérez">
+                    <small class="error-msg" id="error-nombre"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="correo">CORREO ELECTRÓNICO *</label>
+                    <input type="email" id="correo" name="correo" maxlength="100" placeholder="ejemplo@gmail.com">
+                    <small class="error-msg" id="error-correo"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">NÚMERO DE CONTACTO *</label>
+                    <input type="tel" id="telefono" name="telefono" maxlength="12" placeholder="Ej: +56912345678 o 912345678">
+                    <small class="error-msg" id="error-telefono"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="comentario">COMENTARIO O MENSAJE *</label>
+                    <textarea id="comentario" name="comentario" rows="5" maxlength="500" placeholder="Escribe tu mensaje aquí..."></textarea>
+                    <div class="char-counter"><span id="char-count">0</span>/500</div>
+                    <small class="error-msg" id="error-comentario"></small>
+                </div>
+
+                <button type="submit" class="btn-submit">ENVIAR MENSAJE</button>
+            </form>
+
+            <div id="mensaje-exito" class="alert-success hidden">
+                ¡Gracias por contactarnos! Hemos recibido tu mensaje correctamente.
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
