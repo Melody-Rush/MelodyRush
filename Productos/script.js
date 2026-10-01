@@ -38,14 +38,26 @@ function renderizarProductos() {
     });
 }
 
+
 function agregarAlCarrito(id) {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const producto = productos.find(p => p.id === id);
-    
-    carrito.push(producto);
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-    actualizarContador();
-    alert(`${producto.nombre} añadido al carrito`);
+
+    if (producto) {
+        // Aseguramos que la propiedad imagen guarde siempre el nombre limpio
+        const productoAGuardar = {
+            ...producto,
+            imagen: producto.imagen.replace('../Home/img/', '').replace('img/', '')
+        };
+
+        carrito.push(productoAGuardar);
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        
+        actualizarContador();
+        alert(`¡${producto.nombre} fue añadido al carrito!`);
+    } else {
+        console.error("Producto no encontrado con el ID:", id);
+    }
 }
 
 function actualizarContador() {

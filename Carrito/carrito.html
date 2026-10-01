@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Carrito - Melody Rush</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Ajusta la ruta a tu CSS si es necesario -->
+</head>
+<body>
+    <!-- ENCABEZADO Y NAVEGACIÓN -->
+    <header class="encabezado">
+        <div class="logo">
+            <img src="../Home/img/Melody Rush.png" alt="Logo Melody Rush"> 
+            <h2>Melody <span>Rush</span></h2>
+        </div>
+        <nav class="menu">
+            <a href="../Home/index.html">Home</a>
+            <a href="../Productos/productos.html">Productos</a>
+            <a href="../nosotros/nosotros.html">Nosotros</a>
+            <a href="../blog/noticias.html">Blogs</a>
+            <a href="../Contactanos/contacto.html">Contacto</a>
+        </nav>
+    </header>
+
+    <!-- CONTENIDO DEL CARRITO -->
+    <main class="carrito-main-container">
+        <h1 class="text-center">TU CARRITO DE COMPRAS</h1>
+        
+        <div class="carrito-layout">
+            <!-- Lista de productos -->
+            <div class="carrito-lista" id="lista-carrito">
+                <!-- Los productos se inyectarán aquí con JS -->
+                <p class="carrito-vacio-msg">Cargando carrito...</p>
+            </div>
+
+            <!-- Resumen de compra -->
+            <div class="carrito-resumen">
+                <h3>Resumen del pedido</h3>
+                <div class="resumen-item">
+                    <span>Subtotal</span>
+                    <span id="carrito-subtotal">$0</span>
+                </div>
+                <div class="resumen-item total-final">
+                    <span>Total</span>
+                    <span id="carrito-total">$0</span>
+                </div>
+                <button class="btn-pagar" id="btn-procesar-pago">Procesar Pago</button>
+                <button class="btn-vaciar" id="btn-vaciar-carrito" onclick="vaciarCarrito()">Vaciar Carrito</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

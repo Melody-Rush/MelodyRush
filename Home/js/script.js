@@ -1,30 +1,37 @@
-/* FUNCIONES GENERALES DE VALIDACION */
-
-function mostrarError(inputElemento, spanError, mensaje){   //mostrar un mensaje de error
+/* ==========================================
+   1. FUNCIONES GENERALES DE VALIDACIÓN
+   ========================================== */
+function mostrarError(inputElemento, spanError, mensaje) {
     inputElemento.classList.add("input-error");
     spanError.textContent = `⚠️ ${mensaje}`;
 }
-function limpiarError(inputElemento, spanError){     
-    inputElemento.classList.remove("input-error");       //limpiar mensaje de error
-    spanError.textContent="";
+
+function limpiarError(inputElemento, spanError) {
+    inputElemento.classList.remove("input-error");
+    spanError.textContent = "";
 }
-function estaVacio(valor){                  //para ver si un campo de text esta vacio
+
+function estaVacio(valor) {
     return valor.trim() === "";
 }
-function superaMaximo(valor, maximo){       //ver si un texto supera max de caracteres.
-    return valor.length>maximo;
+
+function superaMaximo(valor, maximo) {
+    return valor.length > maximo;
 }
-function longitudEntre(valor, minimo, maximo){           //para ver si esta dentro del rango
-    return valor.length>= minimo && valor.length<=maximo;
+
+function longitudEntre(valor, minimo, maximo) {
+    return valor.length >= minimo && valor.length <= maximo;
 }
-//para verificar el domino permitido
-function correoPermitido(correo){
-    const patronCorreo= /^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i;
+
+function correoPermitido(correo) {
+    const patronCorreo = /^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i;
     return patronCorreo.test(correo);
 }
 
 
-
+/* ==========================================
+   2. LISTA DE PRODUCTOS
+   ========================================== */
 const productos = [
     { id: 1, nombre: "Baby Album", precio: 15000, imagen: "baby.webp" },
     { id: 2, nombre: "Daft Punk", precio: 25000, imagen: "daft.webp" },
@@ -36,14 +43,15 @@ const productos = [
     { id: 8, nombre: "Linkin Park", precio: 20000, imagen: "linkin1.webp" }
 ];
 
+
+/* ==========================================
+   3. LÓGICA DE PRODUCTOS Y CARRITO
+   ========================================== */
 function renderizarProductos() {
     const contenedor = document.getElementById('contenedor-productos');
-    if (!contenedor) return;
+    if (!contenedor) return; // Si la página actual no tiene catálogo, no hace nada
 
-    // Detecta si la página actual está dentro de la carpeta "Productos"
     const esPaginaProductos = window.location.pathname.toLowerCase().includes('productos');
-    
-    // Si está en productos.html busca en ../Home/img/, si está en index.html busca en img/
     const rutaImg = esPaginaProductos ? '../Home/img/' : 'img/';
 
     contenedor.innerHTML = "";
@@ -66,11 +74,21 @@ function renderizarProductos() {
 function agregarAlCarrito(id) {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const producto = productos.find(p => p.id === id);
+
     if (producto) {
-        carrito.push(producto);
+        // Aseguramos que la propiedad imagen guarde siempre el nombre limpio
+        const productoAGuardar = {
+            ...producto,
+            imagen: producto.imagen.replace('../Home/img/', '').replace('img/', '')
+        };
+
+        carrito.push(productoAGuardar);
         localStorage.setItem('carrito', JSON.stringify(carrito));
+        
         actualizarContador();
-        alert(`${producto.nombre} añadido al carrito`);
+        alert(`¡${producto.nombre} fue añadido al carrito!`);
+    } else {
+        console.error("Producto no encontrado con el ID:", id);
     }
 }
 
@@ -82,13 +100,11 @@ function actualizarContador() {
     }
 }
 
-// Ejecución segura al cargar el DOM
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        renderizarProductos();
-        actualizarContador();
-    });
-} else {
+
+/* ==========================================
+   4. INICIALIZACIÓN
+   ========================================== */
+document.addEventListener('DOMContentLoaded', () => {
     renderizarProductos();
     actualizarContador();
-}
+});

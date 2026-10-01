@@ -1,0 +1,259 @@
+/* ===================================================
+   ESTILOS DE LA PÁGINA DEL CARRITO
+   =================================================== */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f5f7;
+    color: #333333;
+}
+
+/* ENCABEZADO Y NAVEGACIÓN */
+.encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 50px;
+    background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre la imagen y el texto */
+}
+
+/* Control del tamaño de la imagen */
+.logo img {
+    height: 38px; /* Ajusta este valor si lo quieres más grande o pequeño */
+    width: auto;  /* Mantiene la proporción sin deformarse */
+    object-fit: contain;
+}
+.logo h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    background: linear-gradient(90deg, #ffffff, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.carrito-main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.carrito-main-container h1 {
+    color: #1e1b4b;
+    margin-bottom: 30px;
+}
+
+.carrito-layout {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* Columna Izquierda: Lista de productos */
+.carrito-lista {
+    flex: 2;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.carrito-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.carrito-item:last-child {
+    border-bottom: none;
+}
+
+.carrito-item-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.carrito-item-info {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.carrito-item-info h4 {
+    margin: 0 0 5px 0;
+    color: #1e1b4b;
+}
+
+.carrito-item-precio {
+    color: #64748b;
+    font-weight: 600;
+}
+
+.btn-eliminar {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.2s;
+}
+
+.btn-eliminar:hover {
+    background-color: #dc2626;
+}
+
+/* Columna Derecha: Resumen */
+.carrito-resumen {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    position: sticky;
+    top: 90px;
+}
+
+.carrito-resumen h3 {
+    margin-top: 0;
+    color: #1e1b4b;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.resumen-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    color: #64748b;
+    font-size: 16px;
+}
+
+.total-final {
+    font-weight: 800;
+    color: #1e1b4b;
+    font-size: 20px;
+    border-top: 2px solid #f1f5f9;
+    padding-top: 15px;
+}
+
+.btn-pagar {
+    width: 100%;
+    background-color: #1e1b4b;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.2s;
+}
+
+.btn-pagar:hover {
+    background-color: #4c1d95;
+}
+
+.btn-vaciar {
+    width: 100%;
+    background-color: transparent;
+    color: #ef4444;
+    border: 1px solid #ef4444;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.2s;
+}
+
+.btn-vaciar:hover {
+    background-color: #fef2f2;
+}
+
+.carrito-vacio-msg {
+    text-align: center;
+    color: #64748b;
+    padding: 30px;
+}
+.menu {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.menu a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+    font-size: 15px;
+    position: relative;
+    padding: 6px 0;
+    transition: color 0.3s ease;
+}
+
+.menu a:hover,
+.menu a.active {
+    color: #ffffff;
+}
+
+/* Línea animada inferior en el menú */
+.menu a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #c084fc;
+    transition: width 0.3s ease;
+}
+
+.menu a:hover::after,
+.menu a.active::after {
+    width: 100%;
+}
+
+
+
+/* Responsive para el carrito */
+@media (max-width: 768px) {
+    .carrito-layout {
+        flex-direction: column;
+    }
+    .carrito-resumen {
+        width: 100%;
+    }
+    .carrito-item {
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+    }
+    .carrito-item-info {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    .btn-eliminar {
+        position: absolute;
+        top: 15px;
+        right: 0;
+    }
+}
