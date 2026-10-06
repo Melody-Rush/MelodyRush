@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos - Melody Rush</title>
-    <!-- Si styles.css está en la carpeta raíz en vez de en Productos, cambia a: href="../styles.css" -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header class="encabezado">
          <div class="logo">
-                <img src="../Home/img/Melody Rush.png" alt="Logo Melody Rush"> 
-        <h2>Melody <span>Rush</span></h2>
+            <img src="../Home/img/Melody Rush.png" alt="Logo Melody Rush"> 
+            <h2>Melody <span>Rush</span></h2>
         </div>
         <nav class="menu">
             <a href="../Home/index.html">Home</a>
@@ -19,18 +18,28 @@
             <a href="../nosotros/nosotros.html">Nosotros</a>
             <a href="../blog/noticias.html">Blogs</a>
             <a href="../Contactanos/contacto.html">Contacto</a>
-         
        </nav>
-     <div class="carrito" onclick="location.href='../Carrito/carrito.html'" style="cursor: pointer;">
+       <div class="carrito" onclick="location.href='../Carrito/carrito.html'" style="cursor: pointer;">
             🛒 <span>Carrito</span>
-             <span class="badge" id="cart-count">0</span>
+            <span class="badge" id="cart-count">0</span>
         </div>
     </header>
 
-        
-
     <main>
         <h1 class="text-center">PRODUCTOS</h1>
+        
+        <!-- Barra de Búsqueda y Filtros -->
+        <div class="filtros-tienda">
+            <input type="text" id="buscador" placeholder="🔍 Buscar artista, álbum o código...">
+            <select id="filtro-categoria">
+                <option value="Todos">Todas las categorías</option>
+                <option value="CD">CD</option>
+                <option value="Vinilo">Vinilo</option>
+                <option value="Casete">Casete</option>
+                <option value="Tocadiscos">Tocadiscos</option>
+            </select>
+        </div>
+
         <div class="grid-productos" id="contenedor-productos">
             <!-- Aquí se inyectarán los productos con JavaScript -->
         </div>
