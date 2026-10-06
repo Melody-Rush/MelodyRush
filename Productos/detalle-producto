@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Producto - Melody Rush</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="encabezado">
+         <div class="logo">
+            <img src="../Home/img/Melody Rush.png" alt="Logo Melody Rush"> 
+            <h2>Melody <span>Rush</span></h2>
+        </div>
+        <nav class="menu">
+            <a href="../Home/index.html">Home</a>
+            <a href="productos.html" class="active">Productos</a>
+            <a href="../nosotros/nosotros.html">Nosotros</a>
+            <a href="../blog/noticias.html">Blogs</a>
+            <a href="../Contactanos/contacto.html">Contacto</a>
+       </nav>
+       <div class="carrito" onclick="location.href='../Carrito/carrito.html'" style="cursor: pointer;">
+            🛒 <span>Carrito</span>
+            <span class="badge" id="cart-count">0</span>
+        </div>
+    </header>
+
+    <main class="contenedor-principal">
+        <!-- Navegación Breadcrumb -->
+        <nav class="breadcrumb" id="breadcrumb">
+            <a href="../Home/index.html">Home</a> > <a href="productos.html">Productos</a> > <span id="bread-nombre">Cargando...</span>
+        </nav>
+
+        <section class="detalle-producto">
+            <!-- Columna Izquierda: Galería -->
+            <div class="galeria-producto">
+                <div class="imagen-principal">
+                    <img src="" alt="Imagen del Producto" id="detalle-img">
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Información y Compra -->
+            <div class="info-producto">
+                <h1 id="detalle-nombre">Cargando...</h1>
+                <h2 class="precio" id="detalle-precio">$0</h2>
+                
+                <p class="descripcion" id="detalle-desc">Cargando descripción...</p>
+
+                <!-- Especificaciones del mantenedor -->
+                <div class="especificaciones">
+                    <p><strong>Código:</strong> <span id="detalle-codigo">---</span></p>
+                    <p><strong>Categoría:</strong> <span id="detalle-categoria">---</span></p>
+                    <p><strong>Stock disponible:</strong> <span id="detalle-stock">0</span> unidades</p>
+                </div>
+
+                <div class="acciones-compra">
+                    <div class="control-cantidad">
+                        <label for="cantidad">Cantidad:</label>
+                        <input type="number" id="cantidad" value="1" min="1">
+                    </div>
+                    <button id="btn-add-detalle" class="btn-añadir">Añadir al carrito</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Productos Relacionados -->
+        <section class="productos-relacionados">
+            <h2 class="text-center" style="font-size: 22px;">Productos Relacionados</h2>
+            <div class="grid-productos" id="contenedor-relacionados">
+                <!-- Se inyectarán por JS -->
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
