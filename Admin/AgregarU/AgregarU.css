@@ -1,0 +1,70 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f5f7;
+    color: #333333;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.icon-campana-header{
+    align-items: flex-end;
+}
+.contenedor-pagina{
+    display: flex;
+}
+.barra-Lateral{
+    width: auto;
+    background-color: #b3b3b3;
+    padding: 15px;
+    box-sizing: border-box;
+    border: 2px solid black;
+}
+.barra-separadora{
+    background-color: #000000;
+    width: auto;
+    height: 2px;
+}
+.contenedor-pri{
+    flex-direction: column;
+    background-color: #b3b3b3;
+    border: 2px solid black;
+    flex-grow: 1;
+    padding: 20px;
+}
+/* Estilos para el formulario de Agregar Usuarios */
+#formulario-usuarios label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px; /* Separación con el elemento de arriba */
+    margin-bottom: 2px;
+}
+#formulario-usuarios input, 
+#formulario-usuarios select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    margin-bottom: 2px; /* Poco espacio para que el error quede pegado debajo */
+}
+/* Estilos para los mensajes de error debajo de cada input */
+.mserror {
+    color: #cc0000;
+    font-weight: bold;
+    font-size: 13px;
+    display: block; /* Para que ocupe su propia línea */
+    min-height: 15px; /* Evita que el formulario salte de tamaño si no hay error */
+    margin-bottom: 8px; 
+}
+/* Para que Región y Comuna se vean uno al lado del otro */
+.ubicacion {
+    display: flex;
+    gap: 15px; /* Espacio entre los dos bloques */
+}
+.ubicacion div {
+    flex: 1; /* Ambos toman la misma cantidad de espacio (50%) */
+}

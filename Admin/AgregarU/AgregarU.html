@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Agregar usuarios</title>
+    <link rel="stylesheet" href="AgregarU.css">
+</head>
+    <body>
+        <div class="contenedor-pagina">
+            <aside class="barra-Lateral">
+                <h1>ADMINISTRACION</h1>
+                <div class="barra-separadora"></div>
+                <nav>
+                    <ul>
+                        <a href="../HomeAd/HomeAd.html"><h2>Home</h2></a>
+                        <h2>Usuarios</h2>
+                        <ul>
+                            <a href="../ListarU/ListarU.html"><h2>Listar Usuarios</h2></a>
+                            <a href="../AgregarU/AgregarU.html"><h2>Agregar Usuarios</h2></a>
+                            <a href="#"><h2>Editar Usuarios</h2></a>
+                        </ul>
+                        <h2>Producto</h2>
+                        <ul>
+                            <a href="#"><h2>Listar Productos</h2></a>
+                            <a href="#"><h2>Agregar Productos</h2></a>
+                            <a href="#"><h2>Editar Productos</h2></a>
+                        </ul>
+                    </ul>
+                </nav>
+            </aside>
+
+            <div class="contenedor-pri">
+                <header>
+                    <h1>¡AGREGAR USUARIOS!</h1>
+                </header>
+                
+                <div class="barra-separadora"></div>
+
+                <main>
+                    <form id="formulario-usuarios">
+                        <label for="runRegistro">RUN</label>
+                        <input type="text" id="runRegistro" name="run" placeholder="12345678K">
+                        <small class="mserror" id="errorRunRegistro"></small>
+
+                        <label for="nombreRegistro">Nombre</label>
+                        <input type="text" id="nombreRegistro" name="nombre" placeholder="Tu nombre">
+                        <small class="mserror" id="errorNombreRegistro"></small>
+                            
+                        <label for="apellidosRegistro">Apellidos</label>
+                        <input type="text" id="apellidosRegistro" name="apellidos" placeholder ="Tus apellidos">
+                        <small class="mserror" id="errorApellidosRegistro"></small>
+
+                        <label for="correoRegistro">Correo Electrónico</label>
+                        <input type="email" id="correoRegistro" name="correo" placeholder="correo@gmail.com">
+                        <small class="mserror" id="errorCorreoRegistro"></small>
+                            
+                        <label for="fechaRegistro">Fecha de Nacimiento</label>
+                        <input type="date" id="fechaRegistro" name="fechaNacimiento">
+                        <small class="mserror" id="errorFechaRegistro"></small>
+                            
+                        <label for="telefonoRegistro">Teléfono (opcional)</label>
+                        <input type="tel" id="telefonoRegistro" name="telefono" placeholder="+56 9 1234 5678">
+                        <small class="mserror" id="errorTelefonoRegistro"></small>
+
+                        <label for="passwordRegistro">Contraseña</label>
+                        <input type="password" id="passwordRegistro" name="password" placeholder="••••••••">
+                        <small class="mserror" id="errorPasswordRegistro"></small>
+                            
+                        <label for="confirmarRegistro">Confirmar Contraseña</label>
+                        <input type="password" id="confirmarRegistro" name="confirmar" placeholder="••••••••">
+                        <small class="mserror" id="errorConfirmarRegistro"></small>
+                        
+                        <div class="ubicacion">
+                            <div>
+                                <label for="regionRegistro">Región</label>
+                                <select id="regionRegistro" name="region">
+                                    <option value="">-- Seleccione la región --</option>
+                                    <option value="rm">Región Metropolitana</option>
+                                    <option value="valparaiso">Valparaíso</option>
+                                    <option value="biobio">Biobío</option>
+                                </select>
+                                <small class="mserror" id="errorRegionRegistro"></small>
+                            </div>
+                            <div>
+                                <label for="comunaRegistro">Comuna</label>
+                                <select id="comunaRegistro" name="comuna">
+                                    <option value="">-- Seleccione la comuna --</option>
+                                    <option value="santiago">Santiago</option>
+                                    <option value="providencia">Providencia</option>
+                                    <option value="maipu">Maipú</option>
+                                </select>
+                                <small class="mserror" id="errorComunaRegistro"></small>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-auth">REGISTRAR</button>
+
+                        <div id="caja-mensajes" class="caja-mensajes"></div>
+                    </form>
+                </main>
+            </div>
+            
+
+        </div>
+    </body>
+    <script src="AgregarU.js"></script>
+</html>

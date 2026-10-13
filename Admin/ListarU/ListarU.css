@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f5f7;
+    color: #333333;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.icon-campana-header{
+    align-items: flex-end;
+}
+.contenedor-pagina{
+    display: flex;
+}
+.barra-Lateral{
+    width: auto;
+    background-color: #b3b3b3;
+    padding: 15px;
+    box-sizing: border-box;
+    border: 2px solid black;
+}
+.barra-separadora{
+    background-color: #000000;
+    width: auto;
+    height: 2px;
+}
+.contenedor-pri{
+    flex-direction: column;
+    background-color: #b3b3b3;
+    border: 2px solid black;
+    flex-grow: 1;
+    padding: 20px;
+}
+/* Estilos para la tabla de administración */
+.tabla-admin {
+    width: 100%;
+    border-collapse: collapse; /* Une los bordes para que no se vean dobles */
+    margin-top: 20px;
+    background-color: #ffffff;
+    border: 2px solid black;
+}
+.tabla-admin th, 
+.tabla-admin td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
+/* Cabecera de la tabla oscura para contrastar */
+.tabla-admin th {
+    background-color: #333333;
+    color: white;
+    font-weight: bold;
+}
+/* Color alterno para las filas (hace más fácil leer a lo largo) */
+.tabla-admin tbody tr:nth-child(even) {
+    background-color: #e6e6e6;
+}
+/* Estilo para los botones de acción dentro de la tabla */
+.btn-accion {
+    background-color: #b3b3b3;
+    color: black;
+    border: 2px solid black;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.btn-accion:hover {
+    background-color: #333333;
+    color: white;
+}
