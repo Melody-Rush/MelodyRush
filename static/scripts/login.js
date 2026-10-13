@@ -1,59 +1,78 @@
-const formularioLogin=document.getElementById("formLogin"); // p/ llamar al formulario
+// ==========================================
+// 1. FUNCIONES AUXILIARES DE VALIDACIÓN
+// ==========================================
+function estaVacio(valor) {
+    return !valor || valor.trim() === "";
+}
 
-const correoLogin=document.getElementById("correoLogin"); //llamar los campos
-const contrasenaLogin=document.getElementById("contrasenaLogin"); //campo
+function mostrarError(inputElement, spanError, mensaje) {
+    if (inputElement) inputElement.classList.add("input-error");
+    if (spanError) spanError.textContent = `⚠️ ${mensaje}`;
+}
 
-const errorCorreoLogin=document.getElementById("errorCorreoLogin"); //espacio para errores
-const errorContrasenaLogin=document.getElementById("errorContrasenaLogin"); //error
+function limpiarError(inputElement, spanError) {
+    if (inputElement) inputElement.classList.remove("input-error");
+    if (spanError) spanError.textContent = "";
+}
 
-//para validar correo
-function validarCorreoLogin(){
-    const correo=correoLogin.value.trim();
-    if(estaVacio(correo)) {
-        mostrarError(correoLogin, errorCorreoLogin, "El correo es OBLIGATORIO.");
+function correoPermitido(correo) {
+    const patronCorreo = /^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i;
+    return patronCorreo.test(correo);
+}
+
+function validarCorreoLogin() {
+    const inputCorreo = document.getElementById("correoLogin");
+    const spanError = document.getElementById("errorCorreoLogin");
+    if (!inputCorreo || !spanError) return false;
+
+    const valor = inputCorreo.value;
+    limpiarError(inputCorreo, spanError);
+
+    if (estaVacio(valor)) {
+        mostrarError(inputCorreo, spanError, "El correo electrónico es obligatorio.");
         return false;
     }
-    if(superaMaximo(correo, 100)) {
-        mostrarError(
-            correoLogin, errorCorreoLogin, "El correo no puede superar los 100 caracteres. ");
-            return false;
-    }
-    if(!correoPermitido(correo)) {
-        mostrarError(correoLogin, errorCorreoLogin, "Solo se permiten correos @duoc.cl, @profesor.duoc.cl ó @gmail.com");
+
+    if (!correoPermitido(valor)) {
+        mostrarError(inputCorreo, spanError, "Ingresa un correo válido (duoc.cl, profesor.duoc.cl o gmail.com).");
         return false;
     }
-    limpiarError(correoLogin, errorCorreoLogin);
+
     return true;
 }
 
-//validar contraseña
 function validarContrasenaLogin() {
-    const contrasena=contrasenaLogin.value;
+    const inputPass = document.getElementById("contrasenaLogin");
+    const spanError = document.getElementById("errorContrasenaLogin");
+    if (!inputPass || !spanError) return false;
 
-    if(estaVacio(contrasena)) {
-        mostrarError(contrasenaLogin, errorContrasenaLogin, "La contraseña es OBLIGATORIA. ");
+    const valor = inputPass.value;
+    limpiarError(inputPass, spanError);
+
+    if (estaVacio(valor)) {
+        mostrarError(inputPass, spanError, "La contraseña es obligatoria.");
         return false;
     }
-    if(!longitudEntre(contrasena, 4, 10)) {
-        mostrarError(
-            contrasenaLogin, errorContrasenaLogin, "La contraseña debe tener entre 4 y 10 caracteres.");
-            return false;
-    }
-    limpiarError(contrasenaLogin, errorContrasenaLogin);
+
     return true;
 }
 
-//para validar en tiempo real
-correoLogin.addEventListener("input", validarCorreoLogin);
-contrasenaLogin.addEventListener("input", validarContrasenaLogin);
+// ==========================================
+// 2. INICIALIZACIÓN
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const formLogin = document.getElementById("formLogin");
 
-//validar con botn
-formularioLogin.addEventListener("submit", function(event) {
-    event.preventDefault();
+    if (formLogin) {
+        formLogin.addEventListener("submit", (e) => {
+            e.preventDefault();
 
-    const correoValido=validarCorreoLogin();
-    const contrasenaValida=validarContrasenaLogin();
-    if(correoValido && contrasenaValida) {
-        alert("Datos ingresados correctamente. ");
+            const correoValido = validarCorreoLogin();
+            const passValida = validarContrasenaLogin();
+
+            if (correoValido && passValida) {
+                alert("¡Inicio de sesión exitoso!");
+            }
+        });
     }
 });

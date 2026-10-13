@@ -1,0 +1,15 @@
+# Entorno virtual (¡OBLIGATORIO!)
+venv/
+ENV/
+env/
+
+# Cache de Python
+__pycache__/
+*.py[cod]
+
+# Variables de entorno secretas
+.env
+
+# Dependencias de Node/React
+node_modules/
+build/
