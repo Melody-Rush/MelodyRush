@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - Melody Rush</title>
+
+    <!-- Ruta ajustada a tu carpeta static/styles/ -->
+    <link rel="stylesheet" href="{% static 'styles/productos.css' %}">
+</head>
+<body>
+    <!-- ENCABEZADO -->
+    <header class="encabezado">
+        <div class="logo" onclick="location.href='{% url 'home' %}'" style="cursor: pointer;">
+            <img src="{% static 'img/Melody Rush.png' %}" alt="Logo Melody Rush"> 
+            <h2>Melody <span>Rush</span></h2>
+        </div>
+        <nav class="menu">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'lista_productos' %}" class="active">Productos</a>
+            <a href="{% url 'nosotros' %}">Nosotros</a>
+            <a href="{% url 'blogs' %}">Blogs</a>
+            <a href="{% url 'contacto' %}">Contacto</a>
+        </nav>
+        <div class="carrito" onclick="location.href='{% url 'carrito' %}'" style="cursor: pointer;">
+            🛒 <span>Carrito</span>
+            <span class="badge" id="cart-count">0</span>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="text-center">PRODUCTOS</h1>
+        
+        <!-- Barra de Búsqueda y Filtros -->
+        <div class="filtros-tienda">
+            <input type="text" id="buscador" placeholder="🔍 Buscar artista, álbum o código...">
+            <select id="filtro-categoria">
+                <option value="Todos">Todas las categorías</option>
+                <option value="CD">CD</option>
+                <option value="Vinilo">Vinilo</option>
+                <option value="Cassette">Cassette</option>
+                <option value="Tocadiscos">Tocadiscos</option>
+                <option value="Toca CD">Toca CD</option>
+                <option value="Reproductor Cassette">Reproductor Cassette</option>
+            </select>
+        </div>
+
+        <div class="grid-productos" id="contenedor-productos">
+            {% for prod in productos %}
+            <div class="tarjeta-producto producto">
+                <a href="{% url 'detalle_producto' prod.id %}" class="enlace-detalle" style="text-decoration: none; color: inherit; display: block;">
+                    {% if prod.image %}
+                        <img src="{{ prod.image.url }}" alt="{{ prod.name }}">
+                    {% else %}
+                        <img src="{% static 'img/no-image.png' %}" alt="{{ prod.name }}">
+                    {% endif %}
+                    <span class="categoria-badge">{{ prod.category }}</span>
+                    <h3 class="productoti">{{ prod.name }}</h3>
+                </a>
+                <div class="info">
+                    <span>Stock: {{ prod.stock }}</span>
+                    <span>${{ prod.price }}</span>
+                </div>
+                <button data-id="{{ prod.id }}" onclick="agregarAlCarrito(this.dataset.id, 1)">
+                    Añadir al carrito
+                </button>
+            </div>
+            {% empty %}
+                <p style="grid-column: 1 / -1; text-align: center; color: #64748b;">
+                    No hay productos registrados en la base de datos de Neon.
+                </p>
+            {% endfor %}
+        </div>
+    </main>
+
+    <!-- Ruta ajustada a tu carpeta static/scripts/ -->
+    <script src="{% static 'scripts/productos.js' %}"></script>
+</body>
+</html>

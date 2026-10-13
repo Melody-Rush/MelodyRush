@@ -1,2 +1,0 @@
-# Home
-fullstack 2

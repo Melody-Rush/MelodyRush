@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Online - Melody Rush</title>
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+</head>
+<body>
+    <!-- ENCABEZADO -->
+    <header class="encabezado">
+        <div class="logo" onclick="location.href='{% url 'home' %}'" style="cursor: pointer;">
+            <img src="{% static 'img/Melody Rush.png' %}" alt="Logo Melody Rush"> 
+            <h2>Melody <span>Rush</span></h2>
+        </div>
+        <nav class="menu">
+            <a href="{% url 'home' %}" class="active">Home</a>
+            <a href="{% url 'lista_productos' %}">Productos</a>
+            <a href="{% url 'nosotros' %}">Nosotros</a>
+            <a href="{% url 'blogs' %}">Blogs</a>
+            <a href="{% url 'contacto' %}">Contacto</a>
+        </nav>
+        <div class="carrito" onclick="location.href='{% url 'carrito' %}'" style="cursor: pointer;">
+            🛒 <span>Carrito</span>
+            <span class="badge" id="cart-count">0</span>
+        </div>
+    </header>
+
+    <!-- ACCESO LOGIN / REGISTRO -->
+    <div class="acceso">
+        <a href="{% url 'login' %}">Iniciar sesión</a>
+        <span>|</span>
+        <a href="{% url 'registro' %}">Registrarse</a>
+    </div>
+
+    <!-- BANNER PRINCIPAL -->
+    <section class="home">
+        <div class="home-texto">
+            <h1>TIENDA ONLINE</h1>
+            <p>Encuentra lo que buscas....</p>
+            <a href="{% url 'lista_productos' %}" class="boton-productos">⩢ ver productos</a>
+        </div>
+        <div class="principal-imagen">
+            <img src="{% static 'img/soda.webp' %}" alt="Soda Stereo"> 
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE PRODUCTOS DESTACADOS DESDE NEON -->
+    <section class="productos">
+        <h2 class="text-center">PRODUCTOS DESTACADOS</h2>
+        <div class="grid-productos contenedor-productos" id="contenedor-productos">
+            {% for prod in destacados %}
+            <div class="tarjeta-producto producto">
+                <a href="{% url 'detalle_producto' prod.id %}" class="enlace-detalle" style="text-decoration: none; color: inherit; display: block;">
+                    {% if prod.image %}
+                        <img src="{{ prod.image.url }}" alt="{{ prod.name }}">
+                    {% else %}
+                        <img src="{% static 'img/no-image.png' %}" alt="{{ prod.name }}">
+                    {% endif %}
+                    <span class="categoria-badge">{{ prod.category }}</span>
+                    <h3 class="productoti">{{ prod.name }}</h3>
+                </a>
+                <div class="info">
+                    <span>Stock: {{ prod.stock }}</span>
+                    <span>${{ prod.price }}</span>
+                </div>
+                <button data-id="{{ prod.id }}" onclick="agregarAlCarrito(this.dataset.id, 1)">
+                    Añadir al carrito
+                </button>
+            </div>
+            {% empty %}
+                <p style="grid-column: 1 / -1; text-align: center; color: #64748b;">
+                    No hay productos destacados por el momento.
+                </p>
+            {% endfor %}
+        </div>
+    </section>
+    
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-izq">
+            <div class="superior-footer">
+                <span class="site">Melody Rush</span>
+                <div class="pagos">
+                    <div class="tarjeta">VISA</div>
+                    <div class="tarjeta">MC</div>
+                    <div class="tarjeta">AMEX</div>
+                </div>
+            </div>
+
+            <div class="categorias-footer">
+                <a href="{% url 'lista_productos' %}">Álbumes</a>
+                <span>|</span>
+                <a href="{% url 'lista_productos' %}">Vinilos</a>
+                <span>|</span>
+                <a href="{% url 'lista_productos' %}">Ofertas</a>
+            </div>
+        </div>
+        <div class="footer-der">
+            <p class="textonews">Escribe tu email para obtener noticias de nuestros productos.</p>
+            <div class="newsletter">
+                <input type="email" placeholder="Enter Email">
+                <button type="button">Subscribe</button>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'scripts/home.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ producto.name }} - Melody Rush</title>
+
+    <!-- Usando el mismo CSS de la vista de Productos -->
+    <link rel="stylesheet" href="{% static 'styles/productos.css' %}">
+</head>
+<body>
+    <!-- ENCABEZADO -->
+    <header class="encabezado">
+        <div class="logo" onclick="location.href='{% url 'home' %}'" style="cursor: pointer;">
+            <img src="{% static 'img/Melody Rush.png' %}" alt="Logo Melody Rush"> 
+            <h2>Melody <span>Rush</span></h2>
+        </div>
+        <nav class="menu">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'lista_productos' %}" class="active">Productos</a>
+            <a href="{% url 'nosotros' %}">Nosotros</a>
+            <a href="{% url 'blogs' %}">Blogs</a>
+            <a href="{% url 'contacto' %}">Contacto</a>
+        </nav>
+        <div class="carrito" onclick="location.href='{% url 'carrito' %}'" style="cursor: pointer;">
+            🛒 <span>Carrito</span>
+            <span class="badge" id="cart-count">0</span>
+        </div>
+    </header>
+
+    <!-- DETALLE DEL PRODUCTO -->
+    <main class="main-container" style="max-width: 1100px; margin: 40px auto; padding: 0 20px;">
+        <div class="detalle-wrapper" style="display: flex; gap: 40px; flex-wrap: wrap; background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); align-items: flex-start;">
+            
+            <!-- Contenedor con tamaño controlado para la carátula -->
+            <div class="detalle-imagen" style="flex: 1; min-width: 280px; max-width: 380px; text-align: center; background: #f8fafc; padding: 20px; border-radius: 8px;">
+                {% if producto.image %}
+                    <img src="{{ producto.image.url }}" alt="{{ producto.name }}" style="width: 100%; max-width: 320px; height: auto; max-height: 320px; object-fit: contain; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                {% else %}
+                    <img src="{% static 'img/no-image.png' %}" alt="{{ producto.name }}" style="width: 100%; max-width: 320px; height: auto; border-radius: 6px;">
+                {% endif %}
+            </div>
+
+            <!-- Información del producto -->
+            <div class="detalle-info" style="flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: 15px;">
+                <span class="categoria-badge" style="align-self: flex-start; background: #f3e8ff; color: #7e22ce; padding: 5px 12px; border-radius: 15px; font-weight: bold; font-size: 0.85rem;">{{ producto.category }}</span>
+                <h1 style="font-size: 2rem; color: #1e1b4b; margin: 0;">{{ producto.name }}</h1>
+                <div style="font-size: 1.8rem; font-weight: bold; color: #2e1065;">${{ producto.price }}</div>
+                <div style="color: #16a34a; font-weight: bold; font-size: 0.95rem;">✓ Stock disponible: {{ producto.stock }} unidades</div>
+
+                <div style="border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 15px 0; color: #475569; line-height: 1.6;">
+                    <p>{{ producto.description|default:"Sin descripción disponible." }}</p>
+                </div>
+
+                <button data-id="{{ producto.id }}" 
+                        onclick="agregarAlCarrito(this.dataset.id, 1)" 
+                        style="background-color: #7e22ce; color: white; border: none; padding: 14px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; margin-top: 10px; width: fit-content;">
+                    🛒 Añadir al carrito
+                </button>
+            </div>
+        </div>
+
+        <!-- PRODUCTOS RELACIONADOS -->
+        {% if relacionados %}
+        <section class="productos" style="margin-top: 50px;">
+            <h3 style="font-size: 1.3rem; margin-bottom: 20px; color: #1e1b4b;">Productos Relacionados</h3>
+            <div class="grid-productos contenedor-productos">
+                {% for rel in relacionados %}
+                <div class="tarjeta-producto producto">
+                    <a href="{% url 'detalle_producto' rel.id %}" class="enlace-detalle" style="text-decoration: none; color: inherit; display: block;">
+                        {% if rel.image %}
+                            <img src="{{ rel.image.url }}" alt="{{ rel.name }}">
+                        {% else %}
+                            <img src="{% static 'img/no-image.png' %}" alt="{{ rel.name }}">
+                        {% endif %}
+                        <span class="categoria-badge">{{ rel.category }}</span>
+                        <h3 class="productoti">{{ rel.name }}</h3>
+                    </a>
+                    <div class="info">
+                        <span>Stock: {{ rel.stock }}</span>
+                        <span>${{ rel.price }}</span>
+                    </div>
+                    <button data-id="{{ rel.id }}" onclick="agregarAlCarrito(this.dataset.id, 1)">
+                        Añadir al carrito
+                    </button>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+    </main>
+
+    <!-- Usando el mismo script de Productos -->
+    <script src="{% static 'scripts/productos.js' %}"></script>
+</body>
+</html>

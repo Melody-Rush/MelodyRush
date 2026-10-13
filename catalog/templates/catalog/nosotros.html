@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros - Melody Rush</title>
+    <!-- CSS exclusivo de la página Nosotros -->
+    <link rel="stylesheet" href="{% static 'styles/nosotros.css' %}">
+</head>
+<body>
+    <!-- ENCABEZADO Y NAVEGACIÓN -->
+    <header class="encabezado">
+        <div class="logo" onclick="location.href='{% url 'home' %}'" style="cursor: pointer;">
+            <img src="{% static 'img/Melody Rush.png' %}" alt="Logo Melody Rush"> 
+            <h2>Melody <span>Rush</span></h2>
+        </div>
+        <nav class="menu">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'lista_productos' %}">Productos</a>
+            <a href="{% url 'nosotros' %}" class="active">Nosotros</a>
+            <a href="{% url 'blogs' %}">Blogs</a>
+            <a href="{% url 'contacto' %}">Contacto</a>
+        </nav>
+        <div class="carrito" onclick="location.href='{% url 'carrito' %}'" style="cursor: pointer;">
+            🛒 <span>Carrito</span>
+            <span class="badge" id="cart-count">0</span>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL NOSOTROS -->
+    <div class="contenedor-pagina">
+        <main class="centrar-body">
+            <h1>Conoce a nuestro equipo</h1>
+            <div class="contenedor-descripcion">
+                <div class="contenedor-texto">
+                    <p>Somos los encargados de traer música a tu hogar de una forma única. Melody-Rush existe para ti, para que vuelvas a tu casa de forma melódica y que todos los días sean especiales junto a tus discos preferidos y la inigualable experiencia de un vinilo.</p>
+                </div>
+            </div>
+            <div class="contenedor-nos">
+                <article class="contenedor-S">
+                    <div class="contenedor-texto">
+                        <h2>SOFIA OLIVO</h2>
+                        <p>Scrum master y desarrolladora Frontend</p>
+                    </div>
+                </article>
+
+                <article class="contenedor-C">
+                    <div class="contenedor-texto">
+                        <h2>CRISTOBAL RIQUELME</h2>
+                        <p>Product Owner y desarrollador FullStack</p>
+                    </div>
+                </article>
+
+                <article class="contenedor-J">
+                    <div class="contenedor-texto">
+                        <h2>JORGE MARTINEZ</h2>
+                        <p>QA y desarrollador FullStack</p>
+                    </div>
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-izq">
+            <div class="superior-footer">
+                <span class="site">Melody Rush</span>
+                <div class="pagos">
+                    <div class="tarjeta">VISA</div>
+                    <div class="tarjeta">MC</div>
+                    <div class="tarjeta">AMEX</div>
+                </div>
+            </div>
+
+            <div class="categorias-footer">
+                <a href="{% url 'lista_productos' %}">Álbumes</a>
+                <span>|</span>
+                <a href="{% url 'lista_productos' %}">Vinilos</a>
+                <span>|</span>
+                <a href="{% url 'lista_productos' %}">Ofertas</a>
+            </div>
+        </div>
+        <div class="footer-der">
+            <p class="textonews">Escribe tu email para obtener noticias de nuestros productos.</p>
+            <div class="newsletter">
+                <input type="email" placeholder="Enter Email">
+                <button type="button">Subscribe</button>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

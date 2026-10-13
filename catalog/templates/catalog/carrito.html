@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Carrito - Melody Rush</title>
+    <!-- CSS del carrito (o home.css según la hoja de estilos que uses para esta vista) -->
+    <link rel="stylesheet" href="{% static 'styles/carrito.css' %}">
+</head>
+<body>
+    <!-- ENCABEZADO -->
+    <header class="encabezado">
+        <div class="logo" onclick="location.href='{% url 'home' %}'" style="cursor: pointer;">
+            <img src="{% static 'img/Melody Rush.png' %}" alt="Logo Melody Rush"> 
+            <h2>Melody <span>Rush</span></h2>
+        </div>
+        <nav class="menu">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'lista_productos' %}">Productos</a>
+            <a href="{% url 'nosotros' %}">Nosotros</a>
+            <a href="{% url 'blogs' %}">Blogs</a>
+            <a href="{% url 'contacto' %}">Contacto</a>
+        </nav>
+        <div class="carrito" onclick="location.href='{% url 'carrito' %}'" style="cursor: pointer;">
+            🛒 <span>Carrito</span>
+            <span class="badge" id="cart-count">0</span>
+        </div>
+    </header>
+
+    <!-- CONTENIDO DEL CARRITO -->
+    <main class="carrito-main-container">
+        <h1 class="text-center">TU CARRITO DE COMPRAS</h1>
+        
+        <div class="carrito-layout">
+            <div class="carrito-lista" id="lista-carrito">
+                <p class="carrito-vacio-msg">Cargando carrito...</p>
+            </div>
+
+            <div class="carrito-resumen">
+                <h3>Resumen del pedido</h3>
+                <div class="resumen-item">
+                    <span>Subtotal</span>
+                    <span id="carrito-subtotal">$0</span>
+                </div>
+                <div class="resumen-item total-final">
+                    <span>Total</span>
+                    <span id="carrito-total">$0</span>
+                </div>
+                <button class="btn-pagar" id="btn-procesar-pago">Procesar Pago</button>
+                <button class="btn-vaciar" id="btn-vaciar-carrito" onclick="vaciarCarrito()">Vaciar Carrito</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- JS exclusivo de Carrito -->
+    <script src="{% static 'scripts/carrito.js' %}"></script>
+</body>
+</html>

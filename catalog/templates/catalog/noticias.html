@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs - Melody Rush</title>
+
+    <!-- Hoja de estilo en static/styles/blog.css -->
+    <link rel="stylesheet" href="{% static 'styles/blog.css' %}">
+</head>
+<body>
+    <!-- ENCABEZADO Y NAVEGACIÓN -->
+    <header class="encabezado">
+        <div class="logo" onclick="location.href='{% url 'home' %}'" style="cursor: pointer;">
+            <img src="{% static 'img/Melody Rush.png' %}" alt="Logo Melody Rush"> 
+            <h2>Melody <span>Rush</span></h2>
+        </div>
+        <nav class="menu">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'lista_productos' %}">Productos</a>
+            <a href="{% url 'nosotros' %}">Nosotros</a>
+            <a href="{% url 'blogs' %}" class="active">Blogs</a>
+            <a href="{% url 'contacto' %}">Contacto</a>
+        </nav>
+        <div class="carrito" onclick="location.href='{% url 'carrito' %}'" style="cursor: pointer;">
+            🛒 <span>Carrito</span>
+            <span class="badge" id="cart-count">0</span>
+        </div>
+    </header>
+
+    <!-- CONTENIDO DE BLOGS -->
+    <div class="contenedor-pagina">
+        <main class="centrar-body">
+            <section>
+                <h1>NOTICIAS MÁS RECIENTES</h1>
+                <div class="contenedor-blog">
+                    <article class="blog">
+                        <div class="contenedor-texto">
+                            <h2>Linkin Park lanza un nuevo disco: Unshatter Film Soundtrack</h2>
+                            <p>Incluye 20 canciones grabadas en vivo en noviembre de 2024 durante su presentación en São Paulo.</p>
+                            <p>Este disco funciona como la banda sonora oficial del nuevo documental y película de la banda que documenta su reaparición y gira mundial con Emily Armstrong.</p>
+                            <p>El álbum salió el 25 de septiembre de 2026.</p>
+                            <button class="boton-caso">VER CASO</button>
+                        </div>
+                        <!-- Imagen desde static/imgblog/blog/ -->
+                        <img src="{% static 'imgblog/blog/Linkin Park.png' %}" class="imagen-blog" alt="Linkin Park">
+                    </article>
+
+                    <article class="blog">
+                        <div class="contenedor-texto">
+                            <h2>¡El CD parece estar más vivo que nunca!</h2>
+                            <p>Según un informe de Luminate, una de las compañías de análisis de datos más reconocidas de la industria del entretenimiento, las ventas de CDs en Estados Unidos aumentaron un 16 % en el primer semestre de 2026, alcanzando las 16,3 millones de unidades.</p>
+                            <p>Además varios locatarios de tiendas de Compact Disc notan un aumento sustancial de compra de discos de los años 2000s. Esto por un valor nostálgico y coleccionable a un precio accesible.</p>
+                            <button class="boton-caso">VER CASO</button>
+                        </div>
+                        <!-- Imagen desde static/imgblog/blog/ -->
+                        <img src="{% static 'imgblog/blog/cd-store-shopping-BB-Espagnol-2022-billboard-1548.jpg' %}" class="imagen-blog" alt="Tienda de CDs">
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-izq">
+            <div class="superior-footer">
+                <span class="site">Melody Rush</span>
+                <div class="pagos">
+                    <div class="tarjeta">VISA</div>
+                    <div class="tarjeta">MC</div>
+                    <div class="tarjeta">AMEX</div>
+                </div>
+            </div>
+
+            <div class="categorias-footer">
+                <a href="{% url 'lista_productos' %}">Álbumes</a>
+                <span>|</span>
+                <a href="{% url 'lista_productos' %}">Vinilos</a>
+                <span>|</span>
+                <a href="{% url 'lista_productos' %}">Ofertas</a>
+            </div>
+        </div>
+        <div class="footer-der">
+            <p class="textonews">Escribe tu email para obtener noticias de nuestros productos.</p>
+            <div class="newsletter">
+                <input type="email" placeholder="Enter Email">
+                <button type="button">Subscribe</button>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
