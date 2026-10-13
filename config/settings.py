@@ -30,9 +30,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = [
- 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # --- LIBRERÍAS EXTERNAS PARA REACT Y API ---
+    'rest_framework',
+    'corsheaders',
 
+    # --- TUS APLICACIONES ---
     'accounts',
     'catalog',
     'cart',
@@ -50,8 +52,8 @@ INSTALLED_APPS = [
     'api',
 ]
 
-
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # <-- AGREGAR AQUÍ ARRIBA DE TODO
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -61,6 +63,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Permitir que React (localhost:3000) se comunique con Django (localhost:8000)
+CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [

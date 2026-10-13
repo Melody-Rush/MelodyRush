@@ -1,8 +1,13 @@
 from django.shortcuts import render, get_object_or_404
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from .models import Product
+from .serializers import ProductSerializer
 
+# ==========================================
+# 1. VISTAS HTML TRADICIONALES (Se conservan)
+# ==========================================
 def home(request):
-    # Trae los primeros 4 productos para la portada
     destacados = Product.objects.all()[:4]
     return render(request, 'catalog/index.html', {'destacados': destacados})
 
@@ -35,3 +40,22 @@ def login_view(request):
 
 def registro_view(request):
     return render(request, 'catalog/registro.html')
+
+
+# ==========================================
+# 2. ENDPOINTS PARA REACT (API - JSON)
+# ==========================================
+
+# Retorna la lista completa de productos para la tienda en React
+@api_view(['GET'])
+def api_productos(request):
+    productos = Product.objects.all()
+    serializer = ProductSerializer(productos, many=True)
+    return Response(serializer.data)
+
+# Retorna el detalle de un solo producto según su ID
+@api_view(['GET'])
+def api_detalle_producto(request, product_id):
+    producto = get_object_or_404(Product, pk=product_id)
+    serializer = ProductSerializer(producto)
+    return Response(serializer.data)
