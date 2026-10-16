@@ -3,72 +3,157 @@ body {
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f5f7;
-    color: #333333;
+    color: #1e1b4b;
 }
-header{
+.contenedor-pagina {
+    display: flex;
+    min-height: 100vh;
+}
+/* barra lateral admin */
+.barra-Lateral {
+    width: 260px;
+    background: linear-gradient(180deg, #24164f, #3f1d7a);
+    padding: 28px 20px;
+    box-sizing: border-box;
+    color: white;
+}
+
+/* titulo */
+.barra-Lateral h1 {
+    margin: 0 0 18px 0;
+    font-size: 22px;
+    font-weight: 800;
+    text-align: center;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+.barra-separadora {
+    width: 100%;
+    height: 2px;
+    background-color: #c084fc;
+    margin-bottom: 22px;
+}
+/* listas */
+.barra-Lateral ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* submenu */
+.barra-Lateral ul ul {
+    padding-left: 18px;
+    margin-top: 6px;
+    margin-bottom: 14px;
+}
+
+.barra-Lateral a {
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 10px 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+/* texto menu */
+.barra-Lateral a h2 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* texto submenu */
+.barra-Lateral ul ul a h2 {
+    font-size: 14px;
+    font-weight: 500;
+    color: #e9d5ff;
+}
+/* hover*/
+.barra-Lateral a:hover {
+    background-color: rgba(192, 132, 252, 0.18);
+    transform: translateX(3px);
+}
+
+/* contenido principal */
+.contenedor-pri {
+    flex-grow: 1;
+    background-color: #f8fafc;
+    padding: 35px;
+    box-sizing: border-box;
+}
+
+/* header*/
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.icon-campana-header{
-    align-items: flex-end;
+
+header h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 800;
+    color: #24164f;
 }
-.contenedor-pagina{
-    display: flex;
-}
-.barra-Lateral{
-    width: auto;
-    background-color: #b3b3b3;
-    padding: 15px;
-    box-sizing: border-box;
-    border: 2px solid black;
-}
-.barra-separadora{
-    background-color: #000000;
-    width: auto;
-    height: 2px;
-}
-.contenedor-pri{
-    flex-direction: column;
-    background-color: #b3b3b3;
-    border: 2px solid black;
-    flex-grow: 1;
-    padding: 20px;
-}
-/* Estilos para la tabla de administración */
+/* tabla*/
 .tabla-admin {
     width: 100%;
-    border-collapse: collapse; /* Une los bordes para que no se vean dobles */
-    margin-top: 20px;
+    border-collapse: collapse;
+    margin-top: 25px;
     background-color: #ffffff;
-    border: 2px solid black;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(36, 22, 79, 0.08);
 }
-.tabla-admin th, 
-.tabla-admin td {
-    border: 1px solid black;
-    padding: 10px;
+/* celdass*/
+.tabla-admin th, .tabla-admin td {
+    padding: 14px 16px;
     text-align: left;
+    border-bottom: 1px solid #e5e7eb;
 }
-/* Cabecera de la tabla oscura para contrastar */
+/* cabecera de la tabal*/
 .tabla-admin th {
-    background-color: #333333;
-    color: white;
-    font-weight: bold;
+    background: linear-gradient( 90deg, #24164f, #4c1d95);
+    color: #ffffff;
+    font-weight: 700;
 }
-/* Color alterno para las filas (hace más fácil leer a lo largo) */
+/* filas */
 .tabla-admin tbody tr:nth-child(even) {
-    background-color: #e6e6e6;
+    background-color: #faf7ff;
 }
-/* Estilo para los botones de acción dentro de la tabla */
+/* hover fila */
+.tabla-admin tbody tr:hover {
+    background-color: #f3e8ff;
+}
+/* btnes */
 .btn-accion {
-    background-color: #b3b3b3;
-    color: black;
-    border: 2px solid black;
-    padding: 5px 10px;
+    background-color: #ede9fe;
+    color: #4c1d95;
+    border: 1px solid #c4b5fd;
+    padding: 7px 12px;
+    border-radius: 7px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 700;
+    transition: all 0.2s ease;
 }
 .btn-accion:hover {
-    background-color: #333333;
+    background-color: #4c1d95;
     color: white;
+    transform: translateY(-1px);
+}
+/* responsive (para que la pag se adapte al tamaño de la pag */
+@media (max-width: 768px) {
+    .contenedor-pagina {
+        flex-direction: column;
+    }
+    .barra-Lateral {
+        width: 100%;
+    }
+    .contenedor-pri {
+        padding: 20px;
+    }
+    .tabla-admin {
+        font-size: 13px;
+    }
 }

@@ -29,16 +29,30 @@ function cargarUsuarios() {
                 <td>${usuario.apellidos}</td>
                 <td>${usuario.correo}</td>
                 <td style="text-transform: uppercase;">${usuario.region}</td>
+
                 <td>
-                    <button class="btn-accion">Editar</button>
-                    <button class="btn-accion" style="color: red;">Borrar</button>
+                    <button class="btn-accion" onclick="editarUsuario(${indice})">Editar</button>
+                    <button class="btn-accion" onclick="borrarUsuario(${indice})">Borrar</button>
                 </td>
             </tr>
         `;
-        
         cuerpoTabla.innerHTML += filaHTML;
     });
 }
 
-// 4. EJECUTAMOS LA FUNCIÓN AL CARGAR LA PÁGINA
-cargarUsuarios();
+//funcion para borrar
+function borrarUsuario(indice){
+    const confirmar=confirm(
+        "¿Estás seguro de que quieres eliminar este usuario?"
+    );
+    if(!confirmar){
+        return;
+    }
+    usuariosGuardados.splice(indice, 1);
+    localStorage.setItem(
+        "misUsuarios", JSON.stringify(usuariosGuardados)
+    );
+    //EJECUTAMOS LA FUNCIÓN AL CARGAR LA PÁGINA
+    cargarUsuarios();
+}
+
