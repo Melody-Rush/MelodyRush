@@ -1,0 +1,82 @@
+/* ============================================================
+   SECCIÓN CATÁLOGO DE PRODUCTOS
+   ============================================================ */
+.pagina-productos {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.titulo-catalogo {
+    font-size: 32px;
+    font-weight: 800;
+    color: #1e1b4b;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 1.5px;
+}
+
+/* BANNER DE FILTROS Y BÚSQUEDA */
+.barra-filtros {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    background: #ffffff;
+    padding: 15px 25px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    margin-bottom: 35px;
+    flex-wrap: wrap;
+}
+
+.buscador-input {
+    flex: 1;
+    min-width: 250px;
+    padding: 10px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.buscador-input:focus {
+    border-color: #c084fc;
+}
+
+.filtro-categoria {
+    padding: 10px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #1e1b4b;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+}
+
+/* GRILLA DE PRODUCTOS */
+.grid-catalogo {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+@media (max-width: 992px) {
+    .grid-catalogo {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .grid-catalogo {
+        grid-template-columns: 1fr;
+    }
+    .barra-filtros {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
