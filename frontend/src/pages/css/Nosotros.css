@@ -1,0 +1,171 @@
+/* ============================================================
+   ESTILOS GENERALES DE LA PÁGINA NOSOTROS
+   ============================================================ */
+.contenedor-pagina-nosotros {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px 60px 20px;
+    box-sizing: border-box;
+}
+
+/* ============================================================
+   1. TARJETA SUPERIOR: SOBRE MELODY RUSH
+   ============================================================ */
+.tarjeta-sobre-nosotros {
+    background-color: #ffffff;
+    padding: 45px 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.tarjeta-sobre-nosotros h2 {
+    color: #1e1b4b;
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0 0 10px 0;
+    letter-spacing: 1px;
+}
+
+.linea-decorativa {
+    width: 60px;
+    height: 4px;
+    background-color: #c084fc;
+    margin: 0 auto 25px auto;
+    border-radius: 2px;
+}
+
+.texto-mision {
+    color: #4b5563;
+    line-height: 1.8;
+    font-size: 1.05rem;
+    max-width: 900px;
+    margin: 0 auto 35px auto;
+}
+
+.grid-caracteristicas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.box-caracteristica {
+    background-color: #f8fafc;
+    padding: 25px 20px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid #f1f5f9;
+}
+
+.box-caracteristica h3 {
+    color: #a855f7;
+    font-size: 1.1rem;
+    margin: 0 0 8px 0;
+    font-weight: 700;
+}
+
+.box-caracteristica p {
+    color: #6b7280;
+    font-size: 0.92rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ============================================================
+   2. SECCIÓN: CONOCE A NUESTRO EQUIPO
+   ============================================================ */
+.titulo-equipo {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1e1b4b;
+    margin-bottom: 25px;
+}
+
+.contenedor-descripcion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto 40px auto;
+    padding: 60px 40px;
+    background-color: #1a0b38;
+    border-radius: 16px;
+    color: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+}
+
+.contenedor-descripcion p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    max-width: 850px;
+    margin: 0;
+    color: #f1f5f9;
+}
+
+/* GRILLA DE TARJETAS DE INTEGRANTES */
+.contenedor-nos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+.tarjeta-equipo {
+    padding: 35px 20px;
+    border-radius: 16px;
+    color: #ffffff;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.tarjeta-equipo:hover {
+    transform: translateY(-5px);
+}
+
+.tarjeta-equipo h2 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin: 0 0 10px 0;
+    letter-spacing: 0.5px;
+}
+
+.tarjeta-equipo p {
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.4;
+    opacity: 0.95;
+}
+
+/* COLORES ESPECÍFICOS POR INTEGRANTE */
+.contenedor-S {
+    background-color: #eb8bb8;
+}
+
+.contenedor-C {
+    background-color: #65be1b;
+}
+
+.contenedor-J {
+    background-color: #ca490d;
+}
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+@media (max-width: 992px) {
+    .contenedor-nos {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .contenedor-descripcion {
+        padding: 40px 20px;
+    }
+}

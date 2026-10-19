@@ -1,25 +1,57 @@
 import React from 'react';
+import './css/Nosotros.css';
 
 function Nosotros() {
   return (
-    <div style={{ backgroundColor: '#fff', padding: '40px', borderRadius: '15px', maxWidth: '850px', margin: '0 auto', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
-      <h2 style={{ color: '#1e1b4b', textAlign: 'center', fontSize: '2.2rem', marginBottom: '10px' }}>SOBRE MELODY RUSH</h2>
-      <div style={{ width: '60px', height: '4px', backgroundColor: '#a855f7', margin: '0 auto 30px auto', borderRadius: '2px' }}></div>
-      
-      <p style={{ color: '#4b5563', lineHeight: '1.8', fontSize: '1.05rem' }}>
-        Nacimos en Chile con el propósito de conectar a los amantes de la música analógica y digital de alta fidelidad. Nos especializamos en la importación de vinilos de edición limitada, CDs remasterizados y mercadería oficial de bandas legendarias e independientes.
-      </p>
+    <div className="contenedor-pagina-nosotros">
+      {/* SECCIÓN 1: SOBRE MELODY RUSH */}
+      <section className="tarjeta-sobre-nosotros">
+        <h2>SOBRE MELODY RUSH</h2>
+        <div className="linea-decorativa"></div>
+        
+        <p className="texto-mision">
+          Nacimos en Chile con el propósito de conectar a los amantes de la música analógica y digital de alta fidelidad. Nos especializamos en la importación de vinilos de edición limitada, CDs remasterizados y mercadería oficial de bandas legendarias e independientes.
+        </p>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px', marginTop: '40px' }}>
-        <div style={{ backgroundColor: '#f9fafb', padding: '20px', borderRadius: '10px', textAlign: 'center' }}>
-          <h3 style={{ color: '#a855f7' }}>🔊 Alta Fidelidad</h3>
-          <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>Todos nuestros discos son 100% originales e importados de sellos oficiales.</p>
+        <div className="grid-caracteristicas">
+          <div className="box-caracteristica">
+            <h3>🔊 Alta Fidelidad</h3>
+            <p>Todos nuestros discos son 100% originales e importados de sellos oficiales.</p>
+          </div>
+          <div className="box-caracteristica">
+            <h3>📦 Envíos Seguros</h3>
+            <p>Empaque reforzado antishock para proteger tus vinilos en todo el trayecto.</p>
+          </div>
         </div>
-        <div style={{ backgroundColor: '#f9fafb', padding: '20px', borderRadius: '10px', textAlign: 'center' }}>
-          <h3 style={{ color: '#a855f7' }}>📦 Envíos Seguros</h3>
-          <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>Empaque reforzado antishock para proteger tus vinilos en todo el trayecto.</p>
+      </section>
+
+      {/* SECCIÓN 2: CONOCE A NUESTRO EQUIPO */}
+      <section>
+        <h1 className="titulo-equipo">Conoce a nuestro equipo</h1>
+        
+        <div className="contenedor-descripcion">
+          <p>
+            Somos los encargados de traer música a tu hogar de una forma única. Melody-Rush existe para ti, para que vuelvas a tu casa de forma melódica y que todos los días sean especiales junto a tus discos preferidos y la inigualable experiencia de un vinilo.
+          </p>
         </div>
-      </div>
+
+        <div className="contenedor-nos">
+          <article className="tarjeta-equipo contenedor-S">
+            <h2>SOFIA OLIVO</h2>
+            <p>Scrum master y desarrolladora Frontend</p>
+          </article>
+
+          <article className="tarjeta-equipo contenedor-C">
+            <h2>CRISTOBAL RIQUELME</h2>
+            <p>Product Owner y desarrollador FullStack</p>
+          </article>
+
+          <article className="tarjeta-equipo contenedor-J">
+            <h2>JORGE MARTINEZ</h2>
+            <p>QA y desarrollador FullStack</p>
+          </article>
+        </div>
+      </section>
     </div>
   );
 }

@@ -1,20 +1,91 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './css/Auth.css';
+// ❌ Ya no necesitamos el import del logo porque está en la carpeta 'public'
 
 function Login() {
+  const [correo, setCorreo] = useState('');
+  const [contrasena, setContrasena] = useState('');
+  const [errores, setErrores] = useState({});
+
+  const correoPermitido = (email) => {
+    const patron = /^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i;
+    return patron.test(email);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const nuevoserrores = {};
+
+    if (!correo.trim()) {
+      nuevoserrores.correo = 'El correo electrónico es obligatorio.';
+    } else if (!correoPermitido(correo.trim())) {
+      nuevoserrores.correo = 'Ingresa un correo válido (duoc.cl, profesor.duoc.cl o gmail.com).';
+    }
+
+    if (!contrasena) {
+      nuevoserrores.contrasena = 'La contraseña es obligatoria.';
+    }
+
+    setErrores(nuevoserrores);
+
+    if (Object.keys(nuevoserrores).length === 0) {
+      alert('¡Inicio de sesión exitoso!');
+    }
+  };
+
   return (
-    <div style={{ backgroundColor: '#fff', padding: '40px', borderRadius: '15px', maxWidth: '400px', margin: '40px auto', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
-      <h2 style={{ textAlign: 'center', color: '#1e1b4b', marginBottom: '25px' }}>Iniciar Sesión</h2>
-      <form style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-        <input type="email" placeholder="Correo electrónico" required style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ddd', boxSizing: 'border-box' }} />
-        <input type="password" placeholder="Contraseña" required style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ddd', boxSizing: 'border-box' }} />
-        <button type="submit" style={{ backgroundColor: '#1e1b4b', color: '#fff', border: 'none', padding: '12px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
-          Ingresar
-        </button>
-      </form>
-      <p style={{ textAlign: 'center', color: '#6b7280', fontSize: '0.85rem', marginTop: '20px' }}>
-        ¿No tienes cuenta? <Link to="/registro" style={{ color: '#a855f7', fontWeight: 'bold' }}>Regístrate aquí</Link>
-      </p>
+    <div className="login">
+      {/* ✅ Llamamos a la imagen directamente desde la raíz (public) */}
+      <div className="logo-login">
+        <img src="/img/Melody Rush.png" alt="Logo de Melody Rush" />
+      </div>
+
+      <h2 className="nombremp">Melody Rush</h2>
+
+      <div className="formulario-login">
+        <h2 className="titulo-login">Inicio de sesión</h2>
+
+        <form id="formLogin" onSubmit={handleSubmit} noValidate>
+          <div className="campos">
+            <label htmlFor="correoLogin">CORREO</label>
+            <input
+              type="email"
+              id="correoLogin"
+              value={correo}
+              onChange={(e) => setCorreo(e.target.value)}
+              className={errores.correo ? 'input-error' : ''}
+            />
+            <span className="mserror" id="errorCorreoLogin">
+              {errores.correo && `⚠️ ${errores.correo}`}
+            </span>
+          </div>
+
+          <div className="campos">
+            <label htmlFor="contrasenaLogin">CONTRASEÑA</label>
+            <input
+              type="password"
+              id="contrasenaLogin"
+              value={contrasena}
+              onChange={(e) => setContrasena(e.target.value)}
+              className={errores.contrasena ? 'input-error' : ''}
+            />
+            <span className="mserror" id="errorContrasenaLogin">
+              {errores.contrasena && `⚠️ ${errores.contrasena}`}
+            </span>
+          </div>
+
+          <button type="submit" className="btn-auth">
+            Iniciar sesión
+          </button>
+        </form>
+
+        <div className="auth-footer">
+          <p>
+            ¿No tienes una cuenta? <Link to="/registro">Regístrate aquí</Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,221 @@
+/* ============================================================
+   ESTILOS DE FORMULARIOS (LOGIN Y REGISTRO)
+   ============================================================ */
+.login {
+    min-height: calc(100vh - 250px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    flex-direction: column;
+}
+
+.logo-login {
+    width: 160px;
+    height: 100px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-login img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.nombremp {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e1b4b;
+    text-align: center;
+    margin: 10px 0 25px 0;
+}
+
+.formulario-login {
+    background: #ffffff;
+    width: 100%;
+    max-width: 480px;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+}
+
+.titulo-login {
+    font-size: 28px;
+    font-weight: 800;
+    color: #1e1b4b;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.campos {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.campos label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1e1b4b;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.campos input,
+.campos select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s ease;
+    background-color: #f8fafc;
+    color: #1e293b;
+    box-sizing: border-box;
+}
+
+.campos input:focus,
+.campos select:focus {
+    border-color: #c084fc;
+    box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.2);
+    background-color: #ffffff;
+}
+
+.input-error {
+    border-color: #ef4444 !important;
+    background-color: #fef2f2 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+}
+
+.mserror {
+    color: #ef4444;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 18px;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-auth {
+    width: 100%;
+    padding: 14px;
+    background: #1e1b4b;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+}
+
+.btn-auth:hover {
+    background: #4c1d95;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 29, 149, 0.3);
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.auth-footer a {
+    color: #4c1d95;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.auth-footer a:hover {
+    color: #c084fc;
+    text-decoration: underline;
+}
+
+/* REGISTRO */
+.registro {
+    min-height: calc(100vh - 250px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.formulario-registro {
+    width: 100%;
+    max-width: 430px;
+    background: #ffffff;
+    padding: 25px 30px 30px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.formulario-registro h3 {
+    background-color: #e5e7eb;
+    color: #1e1b4b;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    padding: 10px 12px;
+    margin: 0 0 20px 0;
+    border-radius: 6px;
+}
+
+.formulario-registro label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1e1b4b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.formulario-registro input,
+.formulario-registro select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background-color: #f8fafc;
+    color: #1e293b;
+    font-size: 12px;
+    border: 1px solid #cbd5e1;
+    box-sizing: border-box;
+}
+
+.ubicacion {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.ubicacion > div {
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .formulario-registro {
+        max-width: 100%;
+        padding: 25px;
+    }
+    .ubicacion {
+        flex-direction: column;
+    }
+    .ubicacion > div {
+        width: 100%;
+    }
+}

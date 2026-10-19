@@ -7,32 +7,30 @@ function Productos({ productos, agregarAlCarrito }) {
   const [categoriaSel, setCategoriaSel] = useState('todas');
   const URL_BASE_DJANGO = 'http://127.0.0.1:8000';
 
-  // Extraer categorías únicas disponibles en los productos
+  // Obtener categorías únicas presentes en la lista de productos
   const categorias = ['todas', ...new Set(productos.map(p => p.category).filter(Boolean))];
 
-  // Filtrado dinámico por texto y categoría
+  // Lógica de filtrado por nombre y por categoría
   const productosFiltrados = productos.filter(prod => {
-    const coincideNombre = prod.name.toLowerCase().includes(busqueda.toLowerCase());
-    const coincideCategoria = categoriaSel === 'todas' || prod.category === categoriaSel;
-    return coincideNombre && coincideCategoria;
+    const nombreValido = prod.name ? prod.name.toLowerCase().includes(busqueda.toLowerCase()) : false;
+    const categoriaValida = categoriaSel === 'todas' || prod.category === categoriaSel;
+    return nombreValido && categoriaValida;
   });
 
   return (
-    <div className="pagina-productos">
-      <h1 className="titulo-catalogo">NUESTRO CATÁLOGO</h1>
+    <main>
+      <h2 className="text-center">NUESTRO CATÁLOGO</h2>
 
-      {/* BARRA DE BÚSQUEDA Y FILTRADO */}
-      <div className="barra-filtros">
+      {/* SECCIÓN DE FILTROS Y BÚSQUEDA */}
+      <section className="filtros-tienda">
         <input 
           type="text" 
           placeholder="Buscar vinilo o álbum..." 
-          className="buscador-input"
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
         />
 
         <select 
-          className="filtro-categoria"
           value={categoriaSel}
           onChange={(e) => setCategoriaSel(e.target.value)}
         >
@@ -42,21 +40,18 @@ function Productos({ productos, agregarAlCarrito }) {
             </option>
           ))}
         </select>
-      </div>
+      </section>
 
       {/* GRILLA DE PRODUCTOS */}
-      <div className="grid-catalogo">
+      <section className="grid-productos">
         {productosFiltrados.length === 0 ? (
-          <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#64748b' }}>
-            No se encontraron productos que coincidan con tu búsqueda.
+          <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#64748b', fontSize: '16px' }}>
+            No se encontraron productos que coincidan con los criterios de búsqueda.
           </p>
         ) : (
           productosFiltrados.map(prod => (
-            <div key={prod.id} className="tarjeta-producto producto">
-              <Link 
-                to={`/producto/${prod.id}`} 
-                style={{ textDecoration: 'none', color: 'inherit', display: 'block', width: '100%', textAlign: 'center' }}
-              >
+            <article key={prod.id} className="tarjeta-producto producto">
+              <Link to={`/producto/${prod.id}`} className="enlace-detalle">
                 <img 
                   src={
                     prod.image 
@@ -65,7 +60,7 @@ function Productos({ productos, agregarAlCarrito }) {
                   } 
                   alt={prod.name} 
                 />
-                <span className="categoria-badge">{prod.category}</span>
+                <span className="categoria-badge">{prod.category || 'Álbum'}</span>
                 <h3 className="productoti">{prod.name}</h3>
               </Link>
 
@@ -77,11 +72,11 @@ function Productos({ productos, agregarAlCarrito }) {
               <button onClick={() => agregarAlCarrito(prod)}>
                 Añadir al carrito
               </button>
-            </div>
+            </article>
           ))
         )}
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
 

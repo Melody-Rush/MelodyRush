@@ -3,8 +3,11 @@ import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 
-// Componentes y Páginas
+// Componentes
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
+// Páginas
 import Home from './pages/Home';
 import Productos from './pages/Productos';
 import DetalleProducto from './pages/DetalleProducto';
@@ -56,25 +59,42 @@ function App() {
 
   const totalUnidadesCarrito = carrito.reduce((acc, item) => acc + item.cantidad, 0);
 
-  if (cargando) return <div style={{ color: '#1e1b4b', textAlign: 'center', marginTop: '100px' }}>Cargando catálogo...</div>;
+  if (cargando) {
+    return (
+      <div style={{ color: '#1e1b4b', textAlign: 'center', marginTop: '100px', fontWeight: 'bold' }}>
+        Cargando catálogo...
+      </div>
+    );
+  }
 
   return (
-    <div style={{ backgroundColor: '#f4f5f9', minHeight: '100vh', fontFamily: "'Segoe UI', sans-serif" }}>
-      <Navbar totalUnidadesCarrito={totalUnidadesCarrito} />
+    <div style={{ 
+      backgroundColor: '#f4f5f9', 
+      minHeight: '100vh', 
+      fontFamily: "'Segoe UI', sans-serif", 
+      display: 'flex', 
+      flexDirection: 'column', 
+      justifyContent: 'space-between' 
+    }}>
+      <div>
+        <Navbar totalUnidadesCarrito={totalUnidadesCarrito} />
 
-      <main style={{ maxWidth: '1200px', margin: '40px auto', padding: '0 20px' }}>
-        <Routes>
-          <Route path="/" element={<Home agregarAlCarrito={agregarAlCarrito} />} />
-          <Route path="/productos" element={<Productos productos={productos} agregarAlCarrito={agregarAlCarrito} />} />
-          <Route path="/producto/:id" element={<DetalleProducto productos={productos} agregarAlCarrito={agregarAlCarrito} />} />
-          <Route path="/carrito" element={<Carrito carrito={carrito} eliminarDelCarrito={eliminarDelCarrito} cambiarCantidad={cambiarCantidad} vaciarCarrito={() => setCarrito([])} />} />
-          <Route path="/nosotros" element={<Nosotros />} />
-          <Route path="/blogs" element={<Blogs />} />
-          <Route path="/contacto" element={<Contacto />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/registro" element={<Registro />} />
-        </Routes>
-      </main>
+        <main style={{ maxWidth: '1200px', margin: '40px auto', padding: '0 20px' }}>
+          <Routes>
+            <Route path="/" element={<Home agregarAlCarrito={agregarAlCarrito} />} />
+            <Route path="/productos" element={<Productos productos={productos} agregarAlCarrito={agregarAlCarrito} />} />
+            <Route path="/producto/:id" element={<DetalleProducto productos={productos} agregarAlCarrito={agregarAlCarrito} />} />
+            <Route path="/carrito" element={<Carrito carrito={carrito} eliminarDelCarrito={eliminarDelCarrito} cambiarCantidad={cambiarCantidad} vaciarCarrito={() => setCarrito([])} />} />
+            <Route path="/nosotros" element={<Nosotros />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/contacto" element={<Contacto />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/registro" element={<Registro />} />
+          </Routes>
+        </main>
+      </div>
+
+      <Footer />
     </div>
   );
 }
