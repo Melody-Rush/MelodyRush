@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Agregar Producto</title>
+    <link rel="stylesheet" href="AgregarProductos.css">
+</head>
+<body>
+    <div class="contenedor-pagina">
+        <!-- Sidebar Administración -->
+        <aside class="barra-Lateral">
+            <h1>ADMINISTRACION</h1>
+            <div class="barra-separadora"></div>
+            <nav>
+                <ul>
+                    <li><a href="../HomeAd/HomeAd.html"><h2>Home</h2></a></li>
+                    <li>
+                        <a href="#"><h2>Usuarios</h2></a>
+                        <ul>
+                            <li><a href="../ListarU/ListarU.html"><h2>Listar Usuarios</h2></a></li>
+                            <li><a href="../AgregarU/AgregarU.html"><h2>Agregar Usuarios</h2></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><h2>Producto</h2></a>
+                        <ul>
+                            <li><a href="../ListarProductos/ListarProductos.html"><h2>Listar Productos</h2></a></li>
+                            <li><a href="AgregarProductos.html" class="active"><h2>Agregar Productos</h2></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <div class="contenedor-pri">
+            <header>
+                <h1>¡AGREGAR PRODUCTO!</h1>
+                <div class="icon-campana-header">🔔</div>
+            </header>
+
+            <div class="barra-separadora"></div>
+
+            <main>
+                <div class="card-formulario">
+                    <form id="form-agregar-producto" enctype="multipart/form-data">
+                        
+                        <div class="grupo-campo">
+                            <label for="name">Nombre del Producto / Álbum *</label>
+                            <input type="text" id="name" name="name" placeholder="Ej. Abbey Road - The Beatles" required>
+                        </div>
+
+                        <div class="grid-2-columnas">
+                            <div class="grupo-campo">
+                                <label for="category">Categoría *</label>
+                                <select id="category" name="category" required>
+                                    <option value="" disabled selected>Selecciona una categoría</option>
+                                    <option value="CD">CD</option>
+                                    <option value="Vinilo">Vinilo</option>
+                                    <option value="Cassette">Cassette</option>
+                                    <option value="Tocadiscos">Tocadiscos</option>
+                                    <option value="Toca CD">Toca CD</option>
+                                    <option value="Reproductor Cassette">Reproductor Cassette</option>
+                                </select>
+                            </div>
+
+                            <div class="grupo-campo">
+                                <label for="price">Precio ($) *</label>
+                                <input type="number" id="price" name="price" step="0.01" min="0" placeholder="Ej. 19990" required>
+                            </div>
+                        </div>
+
+                        <div class="grid-2-columnas">
+                            <div class="grupo-campo">
+                                <label for="stock">Stock disponible *</label>
+                                <input type="number" id="stock" name="stock" min="0" placeholder="Ej. 15" required>
+                            </div>
+
+                            <div class="grupo-campo">
+                                <label for="image">Imagen del Producto</label>
+                                <input type="file" id="image" name="image" accept="image/*">
+                            </div>
+                        </div>
+
+                        <div class="acciones-form">
+                            <button type="submit" class="btn-guardar">Guardar Producto</button>
+                            <a href="../ListarProductos/ListarProductos.html" class="btn-cancelar">Cancelar</a>
+                        </div>
+
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="AgregarProductos.js"></script>
+</body>
+</html>
