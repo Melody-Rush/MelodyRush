@@ -1,0 +1,337 @@
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    background-color: #f4f5f7;
+    color: #1e1b4b;
+}
+
+
+/* CONTENEDOR GENERAL */
+.contenedor-pagina {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* BARRA LATERAL */
+.barra-Lateral {
+    width: 260px;
+
+    background: linear-gradient(
+        180deg,
+        #24164f,
+        #3f1d7a
+    );
+
+    padding: 28px 20px;
+
+    box-sizing: border-box;
+
+    color: white;
+}
+
+
+/* TITULO ADMIN */
+.barra-Lateral h1 {
+    margin: 0 0 18px 0;
+
+    font-size: 22px;
+    font-weight: 800;
+
+    text-align: center;
+
+    color: white;
+}
+
+
+/* SEPARADOR */
+.barra-separadora {
+    width: 100%;
+    height: 2px;
+
+    background-color: #c084fc;
+
+    margin-bottom: 22px;
+}
+
+
+/* LISTAS MENU */
+.barra-Lateral ul {
+    list-style: none;
+
+    padding: 0;
+    margin: 0;
+}
+
+
+/* SUBMENU */
+.barra-Lateral ul ul {
+    padding-left: 18px;
+
+    margin-top: 6px;
+    margin-bottom: 14px;
+}
+
+
+/* LINKS MENU */
+.barra-Lateral a {
+    display: block;
+
+    text-decoration: none;
+
+    color: white;
+
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
+    transition: all 0.2s ease;
+}
+
+
+/* TEXTO MENU */
+.barra-Lateral a h2 {
+    margin: 0;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    color: white;
+}
+
+
+/* SUBMENU TEXTO */
+.barra-Lateral ul ul a h2 {
+    font-size: 14px;
+    font-weight: 500;
+
+    color: #e9d5ff;
+}
+
+
+/* HOVER MENU */
+.barra-Lateral a:hover {
+    background-color: rgba(192, 132, 252, 0.18);
+
+    transform: translateX(3px);
+}
+
+
+/* CONTENIDO PRINCIPAL */
+.contenedor-pri {
+    flex-grow: 1;
+
+    background-color: #f8fafc;
+
+    padding: 35px;
+
+    box-sizing: border-box;
+}
+
+
+/* HEADER */
+header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+header h1 {
+    margin: 0;
+
+    font-size: 30px;
+    font-weight: 800;
+
+    color: #24164f;
+}
+
+
+/* FORMULARIO */
+#formulario-usuarios {
+    max-width: 700px;
+
+    margin-top: 25px;
+
+    background-color: #ffffff;
+
+    padding: 30px;
+
+    border-radius: 14px;
+
+    box-shadow: 0 8px 20px rgba(36, 22, 79, 0.08);
+
+    border: 1px solid #e2e8f0;
+}
+
+
+/* LABELS */
+#formulario-usuarios label {
+    display: block;
+
+    font-weight: 700;
+
+    font-size: 12px;
+
+    color: #1e1b4b;
+
+    margin-top: 12px;
+    margin-bottom: 6px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* INPUTS Y SELECT */
+#formulario-usuarios input,
+#formulario-usuarios select {
+    width: 100%;
+
+    padding: 11px 14px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    box-sizing: border-box;
+
+    background-color: #f8fafc;
+
+    color: #1e293b;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: all 0.2s ease;
+}
+
+
+/* FOCUS */
+#formulario-usuarios input:focus,
+#formulario-usuarios select:focus {
+    border-color: #c084fc;
+
+    box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.2);
+
+    background-color: #ffffff;
+}
+
+
+/* ERRORES */
+.mserror {
+    color: #ef4444;
+
+    font-weight: 600;
+
+    font-size: 12px;
+
+    display: block;
+
+    min-height: 16px;
+
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+
+/* REGION Y COMUNA */
+.ubicacion {
+    display: flex;
+
+    gap: 16px;
+
+    margin-top: 6px;
+}
+
+
+.ubicacion div {
+    flex: 1;
+}
+
+
+/* BOTON */
+#formulario-usuarios button {
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 13px;
+
+    background-color: #1e1b4b;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+#formulario-usuarios button:hover {
+    background-color: #4c1d95;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 4px 12px rgba(76, 29, 149, 0.3);
+}
+
+
+/* INPUT CON ERROR */
+.input-error {
+    border-color: #ef4444 !important;
+
+    background-color: #fef2f2 !important;
+
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+}
+
+
+/* MENSAJE DE EXITO */
+.caja-mensajes {
+    margin-top: 15px;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+    .contenedor-pagina {
+        flex-direction: column;
+    }
+
+    .barra-Lateral {
+        width: 100%;
+    }
+
+    .contenedor-pri {
+        padding: 20px;
+    }
+
+    #formulario-usuarios {
+        padding: 20px;
+    }
+
+    .ubicacion {
+        flex-direction: column;
+    }
+}

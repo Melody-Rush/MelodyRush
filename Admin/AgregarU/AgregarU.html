@@ -18,13 +18,13 @@
                         <ul>
                             <a href="../ListarU/ListarU.html"><h2>Listar Usuarios</h2></a>
                             <a href="../AgregarU/AgregarU.html"><h2>Agregar Usuarios</h2></a>
-                            <a href="#"><h2>Editar Usuarios</h2></a>
+                            
                         </ul>
                         <h2>Producto</h2>
                         <ul>
                             <a href="#"><h2>Listar Productos</h2></a>
                             <a href="#"><h2>Agregar Productos</h2></a>
-                            <a href="#"><h2>Editar Productos</h2></a>
+                            
                         </ul>
                     </ul>
                 </nav>
@@ -72,30 +72,48 @@
                         <small class="mserror" id="errorConfirmarRegistro"></small>
                         
                         <div class="ubicacion">
+
                             <div>
                                 <label for="regionRegistro">Región</label>
                                 <select id="regionRegistro" name="region">
                                     <option value="">-- Seleccione la región --</option>
-                                    <option value="rm">Región Metropolitana</option>
-                                    <option value="valparaiso">Valparaíso</option>
-                                    <option value="biobio">Biobío</option>
                                 </select>
-                                <small class="mserror" id="errorRegionRegistro"></small>
+                                <small
+                                    class="mserror"
+                                    id="errorRegionRegistro">
+                                </small>
                             </div>
                             <div>
                                 <label for="comunaRegistro">Comuna</label>
-                                <select id="comunaRegistro" name="comuna">
-                                    <option value="">-- Seleccione la comuna --</option>
-                                    <option value="santiago">Santiago</option>
-                                    <option value="providencia">Providencia</option>
-                                    <option value="maipu">Maipú</option>
+                                <select
+                                    id="comunaRegistro"
+                                    name="comuna"
+                                    disabled>
+                                    <option value="">
+                                        -- Seleccione primero una región --
+                                    </option>
                                 </select>
-                                <small class="mserror" id="errorComunaRegistro"></small>
+                                <small
+                                    class="mserror"
+                                    id="errorComunaRegistro">
+                                </small>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn-auth">REGISTRAR</button>
+                        <label for="direccionRegistro">Dirección</label>
+                        <input
+                            type="text"
+                            id="direccionRegistro"
+                            name="direccion"
+                            maxlength="300"
+                            placeholder="Ej: Calle Arturo Prat #123"
+                        >     
+                        <small
+                            class="mserror"
+                            id="errorDireccionRegistro">
+                        </small>
 
+                        <button type="submit" class="btn-auth">REGISTRAR</button>
                         <div id="caja-mensajes" class="caja-mensajes"></div>
                     </form>
                 </main>
@@ -103,6 +121,7 @@
             
 
         </div>
+        <script src="AgregarU.js"></script>
     </body>
-    <script src="AgregarU.js"></script>
+   
 </html>

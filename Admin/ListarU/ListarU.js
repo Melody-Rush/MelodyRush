@@ -21,7 +21,7 @@ function cargarUsuarios() {
     }
 
     // Si hay usuarios, los recorremos y dibujamos
-    usuariosGuardados.forEach(function(usuario) {
+    usuariosGuardados.forEach(function(usuario, indice) { //aqui creamos boton de editar y borrar
         const filaHTML = `
             <tr>
                 <td>${usuario.run}</td>
@@ -31,7 +31,7 @@ function cargarUsuarios() {
                 <td style="text-transform: uppercase;">${usuario.region}</td>
 
                 <td>
-                    <button class="btn-accion" onclick="editarUsuario(${indice})">Editar</button>
+                    <button class="btn-accion" onclick="editarUsuario(${indice})">Editar</button> 
                     <button class="btn-accion" onclick="borrarUsuario(${indice})">Borrar</button>
                 </td>
             </tr>
@@ -39,6 +39,13 @@ function cargarUsuarios() {
         cuerpoTabla.innerHTML += filaHTML;
     });
 }
+
+//funcion para editar usuario
+function editarUsuario(indice) {
+    localStorage.setItem('indiceUsuarioEditar', indice); // Guardamos el índice del usuario que queremos editar
+    window.location.href = '../EditarU/EditarU.html';   // Nos lleva a la página EditarU
+}
+
 
 //funcion para borrar
 function borrarUsuario(indice){
@@ -52,7 +59,9 @@ function borrarUsuario(indice){
     localStorage.setItem(
         "misUsuarios", JSON.stringify(usuariosGuardados)
     );
+    
     //EJECUTAMOS LA FUNCIÓN AL CARGAR LA PÁGINA
     cargarUsuarios();
 }
-
+//ejecutamos la funcion al cargar la pag
+cargarUsuarios();

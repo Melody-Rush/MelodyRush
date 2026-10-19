@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Editar usuario</title>
+    <link rel="stylesheet" href="EditarU.css">
+</head>
+<body>
+
+    <div class="contenedor-pagina">
+        <aside class="barra-Lateral">
+            <h1>ADMINISTRACION</h1>
+            <div class="barra-separadora"></div>
+            <nav>
+                <ul>
+                    <a href="../HomeAd/HomeAd.html"><h2>Home</h2></a>
+                    <h2>Usuarios</h2>
+
+                    <ul>
+                        <a href="../ListarU/ListarU.html"><h2>Listar Usuarios</h2></a>
+                        <a href="../AgregarU/AgregarU.html"><h2>Agregar Usuarios</h2></a>
+                    </ul>
+                    <h2>Producto</h2>
+
+                    <ul>
+                        <a href="#"><h2>Listar Productos</h2></a>
+                        <a href="#"><h2>Agregar Productos</h2></a>
+                    </ul>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="contenedor-pri">
+            <header>
+                <h1>EDITAR USUARIO</h1>
+            </header>
+            <div class="barra-separadora"></div>
+
+            <main>
+                <form id="formulario-usuarios">
+                    <!-- RUN -->
+                    <label for="runRegistro">RUN</label>
+                    <input type="text" id="runRegistro" name="run" placeholder="12345678K">
+                    <small class="mserror" id="errorRunRegistro"></small>
+
+                    <!-- NOMBRE -->
+                    <label for="nombreRegistro">Nombre</label>
+                    <input type="text" id="nombreRegistro" name="nombre" placeholder="Tu nombre">
+                    <small class="mserror" id="errorNombreRegistro"></small>
+
+                    <!-- APELLIDOS -->
+                    <label for="apellidosRegistro">Apellidos</label>
+                    <input type="text" id="apellidosRegistro" name="apellidos" placeholder="Tus apellidos">
+                    <small class="mserror" id="errorApellidosRegistro"></small>
+
+                    <!-- CORREO -->
+                    <label for="correoRegistro"> Correo Electrónico</label>
+                    <input type="email" id="correoRegistro" name="correo" placeholder="correo@gmail.com">
+                    <small class="mserror" id="errorCorreoRegistro"></small>
+
+                    <!-- FECHA -->
+                    <label for="fechaRegistro">Fecha de Nacimiento</label>
+                    <input type="date" id="fechaRegistro" name="fechaNacimiento">
+                    <small class="mserror" id="errorFechaRegistro"></small>
+                   
+
+                    <!-- TELÉFONO -->
+                    <label for="telefonoRegistro">Teléfono (opcional)</label>
+                    <input type="tel" id="telefonoRegistro" name="telefono" placeholder="+56 9 1234 5678">
+                    <small class="mserror" id="errorTelefonoRegistro"></small>
+
+                    <!-- CONTRASEÑA -->
+                    <label for="passwordRegistro">Contraseña</label>
+                    <input type="password" id="passwordRegistro" name="password" placeholder="••••••••">
+                    <small class="mserror" id="errorPasswordRegistro"></small>
+
+                    <!-- CONFIRMAR CONTRASEÑA -->
+
+                    <label for="confirmarRegistro">Confirmar Contraseña</label>
+                    <input type="password" id="confirmarRegistro" name="confirmar" placeholder="••••••••">
+                    <small class="mserror" id="errorConfirmarRegistro"></small>
+
+
+                    <!-- REGIÓN Y COMUNA -->
+                    <div class="ubicacion">
+                        <div>
+                            <label for="regionRegistro">Región</label>
+                            <select id="regionRegistro" name="region">
+                                <option value="">-- Seleccione la región --</option>
+                            </select>
+                            <small
+                                class="mserror"
+                                id="errorRegionRegistro">
+                            </small>
+                        </div>
+                        <div>
+                            <label for="comunaRegistro">Comuna</label>
+                            <select
+                                id="comunaRegistro"
+                                name="comuna"
+                                disabled>
+                                <option value="">
+                                    -- Seleccione primero una región --
+                                </option>
+                            </select>
+                            <small
+                                class="mserror"
+                                id="errorComunaRegistro">
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- DIRECCIÓN -->
+                    <label for="direccionRegistro">Dirección</label>
+                    <input
+                        type="text"
+                        id="direccionRegistro"
+                        name="direccion"
+                        maxlength="300"
+                        placeholder="Ej: Calle Arturo Prat #123"
+                    >     
+                    <small
+                        class="mserror"
+                        id="errorDireccionRegistro">
+                    </small>
+
+                    <!-- BOTÓN -->
+
+                    <button type="submit" class="btn-auth">GUARDAR CAMBIOS</button>
+                    <div id="caja-mensajes" class="caja-mensajes"></div>
+                </form>
+            </main>
+        </div>
+    </div>
+    <script src="EditarU.js"></script>
+</body>
+</html>
