@@ -4,13 +4,15 @@ import axios from 'axios';
 import SidebarAdmin from '../components/SidebarAdmin';
 import './css/Admin.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'https://melodyrush.onrender.com';
+
 function ListarU() {
   const [usuarios, setUsuarios] = useState([]);
   const navigate = useNavigate();
 
   // Obtener los usuarios de la base de datos al cargar el componente
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/usuarios/')
+    axios.get(`${API_URL}/api/usuarios/`)
       .then(res => {
         setUsuarios(res.data);
       })
@@ -19,7 +21,7 @@ function ListarU() {
 
   const eliminarUsuario = (id) => {
     if (window.confirm('¿Deseas eliminar este usuario de la base de datos?')) {
-      axios.delete(`http://127.0.0.1:8000/api/usuarios/${id}/`)
+      axios.delete(`${API_URL}/api/usuarios/${id}/`)
         .then(() => {
           // Filtrar la lista actual para remover el usuario eliminado
           const nuevaLista = usuarios.filter((u) => u.id !== id);

@@ -3,16 +3,15 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './css/Home.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'https://melodyrush.onrender.com';
+
 function Home({ agregarAlCarrito }) {
   const [destacados, setDestacados] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [errorApi, setErrorApi] = useState(null);
 
-  // Dirección de la API de Django REST
-  const URL_BASE_DJANGO = 'http://127.0.0.1:8000';
-
   useEffect(() => {
-    axios.get(`${URL_BASE_DJANGO}/api/productos/`)
+    axios.get(`${API_URL}/api/productos/`)
       .then(res => {
         // Tomamos los primeros 4 productos para la grilla de destacados
         setDestacados(res.data.slice(0, 4));
@@ -68,7 +67,7 @@ function Home({ agregarAlCarrito }) {
                   <img 
                     src={
                       prod.image 
-                        ? (prod.image.startsWith('http') ? prod.image : `${URL_BASE_DJANGO}${prod.image}`)
+                        ? (prod.image.startsWith('http') ? prod.image : `${API_URL}${prod.image}`)
                         : '/img/no-image.png'
                     } 
                     alt={prod.name} 

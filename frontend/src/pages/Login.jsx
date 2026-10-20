@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './css/Auth.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'https://melodyrush.onrender.com';
+
 function Login() {
   const [correo, setCorreo] = useState('');
   const [contrasena, setContrasena] = useState('');
@@ -43,7 +45,7 @@ function Login() {
       }
 
       // 2. PETICIÓN A LA API DE DJANGO (Para usuarios normales y API activa)
-      axios.post('http://127.0.0.1:8000/api/login/', {
+      axios.post(`${API_URL}/api/login/`, {
         username: usuarioLimpio,
         password: contrasena
       })

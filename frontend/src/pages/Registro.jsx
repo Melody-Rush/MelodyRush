@@ -5,7 +5,7 @@ import { regionesComunas } from '../utils/regionesComunas';
 import './css/Auth.css';
 
 // Apunta a la API de Render en producción y a localhost durante desarrollo
-const API_URL = process.env.REACT_APP_API_URL || 'https://melody-rush-backend.onrender.com';
+const API_URL = process.env.REACT_APP_API_URL || 'https://melodyrush.onrender.com';
 
 function Registro() {
   const [form, setForm] = useState({

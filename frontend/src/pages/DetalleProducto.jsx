@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
+const API_URL = process.env.REACT_APP_API_URL || 'https://melodyrush.onrender.com';
+
 function DetalleProducto({ productos, agregarAlCarrito }) {
   const { id } = useParams();
   const [cantidad, setCantidad] = useState(1);
-  const URL_BASE_DJANGO = 'http://127.0.0.1:8000';
 
   const producto = productos.find(p => p.id === parseInt(id));
 
@@ -28,7 +29,7 @@ function DetalleProducto({ productos, agregarAlCarrito }) {
       <div style={{ flex: '1', minWidth: '280px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         {producto.image && (
           <img 
-            src={producto.image.startsWith('http') ? producto.image : `${URL_BASE_DJANGO}${producto.image}`} 
+            src={producto.image.startsWith('http') ? producto.image : `${API_URL}${producto.image}`} 
             alt={producto.name}
             style={{ width: '100%', maxHeight: '350px', objectFit: 'contain' }}
           />

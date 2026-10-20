@@ -4,6 +4,8 @@ import axios from 'axios';
 import SidebarAdmin from '../components/SidebarAdmin';
 import './css/Admin.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'https://melodyrush.onrender.com';
+
 function EditarProductos({ recargarProductos }) {
   const { id } = useParams(); // Obtiene el ID del producto desde la URL
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ function EditarProductos({ recargarProductos }) {
 
   // 1. Cargar los datos actuales del producto al entrar a la página
   useEffect(() => {
-    axios.get(`http://127.0.0.1:8000/api/productos/${id}/`)
+    axios.get(`${API_URL}/api/productos/${id}/`)
       .then((res) => {
         const data = res.data;
         setForm({
@@ -66,7 +68,7 @@ function EditarProductos({ recargarProductos }) {
       formData.append('image', imageFile);
     }
 
-    axios.put(`http://127.0.0.1:8000/api/productos/${id}/`, formData, {
+    axios.put(`${API_URL}/api/productos/${id}/`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       }

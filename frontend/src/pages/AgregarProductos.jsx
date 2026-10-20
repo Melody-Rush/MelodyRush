@@ -4,6 +4,8 @@ import axios from 'axios';
 import SidebarAdmin from '../components/SidebarAdmin';
 import './css/Admin.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'https://melodyrush.onrender.com';
+
 function AgregarProductos({ recargarProductos }) {
   const [form, setForm] = useState({
     code: '',
@@ -45,7 +47,7 @@ function AgregarProductos({ recargarProductos }) {
     }
 
     // Header para el envío multipart/form-data
-    axios.post('http://127.0.0.1:8000/api/productos/', formData, {
+    axios.post(`${API_URL}/api/productos/`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       }

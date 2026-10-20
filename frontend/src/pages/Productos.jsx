@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './css/Productos.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'https://melodyrush.onrender.com';
+
 function Productos({ productos, agregarAlCarrito }) {
   const [busqueda, setBusqueda] = useState('');
   const [categoriaSel, setCategoriaSel] = useState('todas');
-  const URL_BASE_DJANGO = 'http://127.0.0.1:8000';
 
   // Obtener categorías únicas presentes en la lista de productos
   const categorias = ['todas', ...new Set(productos.map(p => p.category).filter(Boolean))];
@@ -55,7 +56,7 @@ function Productos({ productos, agregarAlCarrito }) {
                 <img 
                   src={
                     prod.image 
-                      ? (prod.image.startsWith('http') ? prod.image : `${URL_BASE_DJANGO}${prod.image}`)
+                      ? (prod.image.startsWith('http') ? prod.image : `${API_URL}${prod.image}`)
                       : '/img/no-image.png'
                   } 
                   alt={prod.name} 

@@ -4,6 +4,8 @@ import SidebarAdmin from '../components/SidebarAdmin';
 import { regionesComunas } from '../utils/regionesComunas';
 import './css/Admin.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'https://melodyrush.onrender.com';
+
 function AgregarU() {
   const [form, setForm] = useState({
     run: '',
@@ -62,7 +64,7 @@ function AgregarU() {
 
     if (Object.keys(errs).length === 0) {
       // Envío de datos a la base de datos con Axios
-      axios.post('http://127.0.0.1:8000/api/usuarios/', form)
+      axios.post(`${API_URL}/api/usuarios/`, form)
         .then(response => {
           setMensajeExito('¡Usuario guardado correctamente en la Base de Datos!');
           setForm({

@@ -4,10 +4,12 @@ import axios from 'axios';
 import SidebarAdmin from '../components/SidebarAdmin';
 import './css/Admin.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'https://melodyrush.onrender.com';
+
 function ListarProductos({ productos, recargarProductos }) {
   const eliminarProducto = (id) => {
     if (window.confirm('¿Estás seguro de eliminar este producto?')) {
-      axios.delete(`http://127.0.0.1:8000/api/productos/${id}/`)
+      axios.delete(`${API_URL}/api/productos/${id}/`)
         .then(() => {
           alert('Producto eliminado.');
           if (recargarProductos) recargarProductos();
