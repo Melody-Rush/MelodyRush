@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { regionesComunas } from '../utils/regionesComunas';
 import './css/Auth.css';
 
 function Registro() {
@@ -13,10 +15,13 @@ function Registro() {
     password: '',
     confirmarPassword: '',
     region: '',
-    comuna: ''
+    comuna: '',
+    direccion: '' // NUEVO CAMPO: Dirección
   });
 
+  const [comunasDisponibles, setComunasDisponibles] = useState([]);
   const [errores, setErrores] = useState({});
+  const navigate = useNavigate();
 
   const correoPermitido = (email) => {
     const patron = /^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i;
@@ -25,7 +30,14 @@ function Registro() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm(prev => ({ ...prev, [name]: value }));
+
+    if (name === 'region') {
+      const reg = regionesComunas.find((item) => item.region === value);
+      setComunasDisponibles(reg ? reg.comunas : []);
+      setForm(prev => ({ ...prev, region: value, comuna: '' }));
+    } else {
+      setForm(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = (e) => {
@@ -84,26 +96,49 @@ function Registro() {
       newErrors.confirmarPassword = 'Las contraseñas no coinciden.';
     }
 
-    // Validar Región y Comuna
+    // Validar Región, Comuna y Dirección
     if (!form.region) newErrors.region = 'Debe seleccionar una región.';
     if (!form.comuna) newErrors.comuna = 'Debe seleccionar una comuna.';
+    if (!form.direccion.trim()) newErrors.direccion = 'La dirección es obligatoria.';
 
     setErrores(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      alert('¡Registro realizado correctamente!');
-      setForm({
-        run: '',
-        nombre: '',
-        apellidos: '',
-        correo: '',
-        fechaNacimiento: '',
-        telefono: '',
-        password: '',
-        confirmarPassword: '',
-        region: '',
-        comuna: ''
-      });
+      axios.post('http://127.0.0.1:8000/api/usuarios/', form)
+        .then(() => {
+          alert('¡Registro realizado con éxito! Ahora puedes iniciar sesión.');
+          setForm({
+            run: '',
+            nombre: '',
+            apellidos: '',
+            correo: '',
+            fechaNacimiento: '',
+            telefono: '',
+            password: '',
+            confirmarPassword: '',
+            region: '',
+            comuna: '',
+            direccion: ''
+          });
+          setComunasDisponibles([]);
+          navigate('/login');
+        })
+        .catch(error => {
+          const detalleError = error.response ? error.response.data : 'Error de conexión con el servidor';
+          console.error('Error al registrar usuario:', detalleError);
+          
+          if (typeof detalleError === 'object') {
+            if (detalleError.run) {
+              setErrores(prev => ({ ...prev, run: detalleError.run[0] }));
+            } else if (detalleError.correo) {
+              setErrores(prev => ({ ...prev, correo: detalleError.correo[0] }));
+            } else {
+              alert('Error al registrar: ' + JSON.stringify(detalleError));
+            }
+          } else {
+            alert('Error al registrar: ' + detalleError);
+          }
+        });
     }
   };
 
@@ -247,9 +282,9 @@ function Registro() {
               className={errores.region ? 'input-error' : ''}
             >
               <option value="">-- Seleccione la región --</option>
-              <option value="RM">Región Metropolitana</option>
-              <option value="V">Valparaíso</option>
-              <option value="VIII">Bío Bío</option>
+              {regionesComunas.map((item) => (
+                <option key={item.region} value={item.region}>{item.region}</option>
+              ))}
             </select>
             <span className="mserror" id="errorRegionRegistro">
               {errores.region && `⚠️ ${errores.region}`}
@@ -263,17 +298,35 @@ function Registro() {
               name="comuna"
               value={form.comuna}
               onChange={handleChange}
+              disabled={!form.region}
               className={errores.comuna ? 'input-error' : ''}
             >
               <option value="">-- Seleccione la comuna --</option>
-              <option value="santiago">Santiago</option>
-              <option value="providencia">Providencia</option>
-              <option value="maipu">Maipú</option>
+              {comunasDisponibles.map((c) => (
+                <option key={c} value={c}>{c}</option>
+              ))}
             </select>
             <span className="mserror" id="errorComunaRegistro">
               {errores.comuna && `⚠️ ${errores.comuna}`}
             </span>
           </div>
+        </div>
+
+        {/* CAMPO DE DIRECCIÓN */}
+        <div className="campos">
+          <label htmlFor="direccionRegistro">DIRECCIÓN</label>
+          <input
+            type="text"
+            id="direccionRegistro"
+            name="direccion"
+            placeholder="Ej: Av. Arturo Prat #123, Depto 402"
+            value={form.direccion}
+            onChange={handleChange}
+            className={errores.direccion ? 'input-error' : ''}
+          />
+          <span className="mserror" id="errorDireccionRegistro">
+            {errores.direccion && `⚠️ ${errores.direccion}`}
+          </span>
         </div>
 
         <button type="submit" className="btn-auth">

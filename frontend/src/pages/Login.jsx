@@ -1,28 +1,23 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './css/Auth.css';
-// ❌ Ya no necesitamos el import del logo porque está en la carpeta 'public'
 
 function Login() {
   const [correo, setCorreo] = useState('');
   const [contrasena, setContrasena] = useState('');
   const [errores, setErrores] = useState({});
-
-  const correoPermitido = (email) => {
-    const patron = /^[^\s@]+@(duoc\.cl|profesor\.duoc\.cl|gmail\.com)$/i;
-    return patron.test(email);
-  };
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const nuevoserrores = {};
 
-    if (!correo.trim()) {
-      nuevoserrores.correo = 'El correo electrónico es obligatorio.';
-    } else if (!correoPermitido(correo.trim())) {
-      nuevoserrores.correo = 'Ingresa un correo válido (duoc.cl, profesor.duoc.cl o gmail.com).';
-    }
+    const usuarioLimpio = correo.trim();
 
+    if (!usuarioLimpio) {
+      nuevoserrores.correo = 'El correo o nombre de usuario es obligatorio.';
+    }
     if (!contrasena) {
       nuevoserrores.contrasena = 'La contraseña es obligatoria.';
     }
@@ -30,13 +25,50 @@ function Login() {
     setErrores(nuevoserrores);
 
     if (Object.keys(nuevoserrores).length === 0) {
-      alert('¡Inicio de sesión exitoso!');
+      // 1. VERIFICACIÓN DE CREDENCIALES DE ADMINISTRADOR
+      const esAdminUser = usuarioLimpio === 'Admin-Rush' || usuarioLimpio === 'Admin Rush' || usuarioLimpio.toLowerCase() === 'admin';
+      const esAdminPass = contrasena === '12345678m';
+
+      if (esAdminUser && esAdminPass) {
+        const adminData = {
+          username: 'Admin-Rush',
+          email: 'admin@melodyrush.cl',
+          is_staff: true
+        };
+        localStorage.setItem('token', 'token-admin-demo');
+        localStorage.setItem('usuario', JSON.stringify(adminData));
+        alert('¡Bienvenido al Panel de Administración!');
+        navigate('/admin');
+        return;
+      }
+
+      // 2. PETICIÓN A LA API DE DJANGO (Para usuarios normales y API activa)
+      axios.post('http://127.0.0.1:8000/api/login/', {
+        username: usuarioLimpio,
+        password: contrasena
+      })
+      .then(res => {
+        const usuarioData = res.data;
+        localStorage.setItem('token', usuarioData.token || '');
+        localStorage.setItem('usuario', JSON.stringify(usuarioData));
+
+        if (usuarioData.is_staff || usuarioData.username === 'Admin-Rush') {
+          alert('¡Bienvenido al Panel de Administración!');
+          navigate('/admin');
+        } else {
+          alert('¡Inicio de sesión exitoso!');
+          navigate('/');
+        }
+      })
+      .catch(err => {
+        console.error('Error al iniciar sesión:', err);
+        setErrores({ backend: 'Credenciales inválidas o el servidor backend no respondió.' });
+      });
     }
   };
 
   return (
     <div className="login">
-      {/* ✅ Llamamos a la imagen directamente desde la raíz (public) */}
       <div className="logo-login">
         <img src="/img/Melody Rush.png" alt="Logo de Melody Rush" />
       </div>
@@ -46,15 +78,22 @@ function Login() {
       <div className="formulario-login">
         <h2 className="titulo-login">Inicio de sesión</h2>
 
+        {errores.backend && (
+          <div className="mserror" style={{ marginBottom: '15px', textAlign: 'center' }}>
+            ⚠️ {errores.backend}
+          </div>
+        )}
+
         <form id="formLogin" onSubmit={handleSubmit} noValidate>
           <div className="campos">
-            <label htmlFor="correoLogin">CORREO</label>
+            <label htmlFor="correoLogin">CORREO / USUARIO</label>
             <input
-              type="email"
+              type="text"
               id="correoLogin"
               value={correo}
               onChange={(e) => setCorreo(e.target.value)}
               className={errores.correo ? 'input-error' : ''}
+              placeholder="correo@gmail.cl"
             />
             <span className="mserror" id="errorCorreoLogin">
               {errores.correo && `⚠️ ${errores.correo}`}

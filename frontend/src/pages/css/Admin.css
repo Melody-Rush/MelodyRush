@@ -1,0 +1,322 @@
+/* ============================================================
+   ESTILOS GENERALES DEL PANEL DE ADMINISTRACIÓN
+   ============================================================ */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f5f7;
+    color: #1e1b4b;
+}
+
+/* CONTENEDOR PRINCIPAL FLEX */
+.contenedor-pagina {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* BARRA LATERAL (SIDEBAR) */
+.barra-Lateral {
+    width: 260px;
+    min-width: 260px;
+    background: linear-gradient(180deg, #24164f 0%, #3f1d7a 100%);
+    padding: 28px 20px;
+    box-sizing: border-box;
+    color: white;
+}
+
+.barra-Lateral h1 {
+    margin: 0 0 18px 0;
+    font-size: 20px;
+    font-weight: 800;
+    text-align: center;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.barra-separadora {
+    width: 100%;
+    height: 2px;
+    background-color: #c084fc;
+    margin-bottom: 22px;
+}
+
+.barra-Lateral nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.barra-Lateral nav ul ul {
+    padding-left: 15px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.barra-Lateral a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.barra-Lateral a.active,
+.barra-Lateral a:hover {
+    background-color: rgba(192, 132, 252, 0.25);
+}
+
+.barra-Lateral h2 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+}
+
+.barra-Lateral ul ul a h2 {
+    font-size: 13px;
+    font-weight: 500;
+    color: #e9d5ff;
+}
+
+.btn-cerrar-sesion-admin {
+    margin-top: 30px;
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(239, 68, 68, 0.2);
+    border: 1px solid #ef4444;
+    color: #fca5a5;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background 0.2s;
+}
+
+.btn-cerrar-sesion-admin:hover {
+    background-color: #ef4444;
+    color: #ffffff;
+}
+
+/* ÁREA DE CONTENIDO PRINCIPAL */
+.contenedor-pri {
+    flex-grow: 1;
+    background-color: #f8fafc;
+    padding: 35px;
+    box-sizing: border-box;
+    overflow-x: auto;
+}
+
+.contenedor-pri header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contenedor-pri header h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 800;
+    color: #24164f;
+    text-transform: uppercase;
+}
+
+.icon-campana-header {
+    font-size: 24px;
+}
+
+/* ESTILOS DE FORMULARIO ADMIN */
+.card-formulario,
+#formulario-usuarios {
+    max-width: 700px;
+    margin-top: 25px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(36, 22, 79, 0.08);
+    border: 1px solid #e2e8f0;
+    box-sizing: border-box;
+}
+
+.card-formulario label,
+#formulario-usuarios label {
+    display: block;
+    font-weight: 700;
+    font-size: 12px;
+    color: #1e1b4b;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-formulario input,
+.card-formulario select,
+#formulario-usuarios input,
+#formulario-usuarios select {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: #f8fafc;
+    color: #1e293b;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.card-formulario input:focus,
+.card-formulario select:focus,
+#formulario-usuarios input:focus,
+#formulario-usuarios select:focus {
+    border-color: #c084fc;
+    box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.2);
+    background-color: #ffffff;
+}
+
+.grid-2-columnas,
+.ubicacion {
+    display: flex;
+    gap: 16px;
+    margin-top: 6px;
+}
+
+.grid-2-columnas > div,
+.ubicacion > div {
+    flex: 1;
+}
+
+.grupo-campo {
+    display: flex;
+    flex-direction: column;
+}
+
+.mserror {
+    color: #ef4444;
+    font-weight: 600;
+    font-size: 12px;
+    display: block;
+    min-height: 16px;
+    margin-top: 4px;
+}
+
+.input-error {
+    border-color: #ef4444 !important;
+    background-color: #fef2f2 !important;
+}
+
+.acciones-form {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.btn-guardar,
+.btn-auth {
+    width: 100%;
+    margin-top: 20px;
+    padding: 13px;
+    background-color: #1e1b4b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-guardar:hover,
+.btn-auth:hover {
+    background-color: #4c1d95;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 29, 149, 0.3);
+}
+
+.btn-cancelar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 25px;
+    background-color: #e2e8f0;
+    color: #475569;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+/* TABLAS DE LISTADOS */
+.tabla-admin {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 25px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.tabla-admin th {
+    background-color: #24164f;
+    color: white;
+    padding: 14px;
+    text-align: left;
+    font-size: 13px;
+}
+
+.tabla-admin td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 14px;
+}
+
+.tabla-admin img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.btn-accion-editar {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 8px;
+    font-weight: 600;
+}
+
+.btn-accion-eliminar {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.caja-mensajes {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .contenedor-pagina {
+        flex-direction: column;
+    }
+    .barra-Lateral {
+        width: 100%;
+    }
+    .grid-2-columnas,
+    .ubicacion {
+        flex-direction: column;
+    }
+}

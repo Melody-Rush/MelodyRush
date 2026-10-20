@@ -13,7 +13,11 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('registro/', views.registro_view, name='registro'),
 
-    # Endpoints API REST (Para que React los consuma)
+    # Endpoints API REST (Para consumo de React)
     path('api/productos/', views.api_productos, name='api_productos'),
     path('api/productos/<int:product_id>/', views.api_detalle_producto, name='api_detalle_producto'),
+    
+    # NUEVOS ENDPOINTS DE USUARIOS:
+    path('api/usuarios/', views.api_usuarios, name='api_usuarios'),
+    path('api/usuarios/<int:user_id>/', views.api_detalle_usuario, name='api_detalle_usuario'),
 ]
