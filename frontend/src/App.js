@@ -28,6 +28,8 @@ import ListarU from './pages/ListarU';
 import AgregarU from './pages/AgregarU';
 import EditarU from './pages/EditarU';
 
+// Constante para la URL del Backend (Render / Producción)
+const API_URL = process.env.REACT_APP_API_URL || 'https://melodyrush.onrender.com';
 
 function App() {
   const [productos, setProductos] = useState([]);
@@ -35,7 +37,7 @@ function App() {
   const location = useLocation();
 
   const cargarProductos = () => {
-    axios.get('http://127.0.0.1:8000/api/productos/')
+    axios.get(`${API_URL}/api/productos/`)
       .then(res => setProductos(res.data))
       .catch(err => console.error('Error al cargar productos de la API:', err));
   };
