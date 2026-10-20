@@ -23,7 +23,7 @@ import Registro from './pages/Registro';
 import HomeAd from './pages/HomeAd';
 import ListarProductos from './pages/ListarProductos';
 import AgregarProductos from './pages/AgregarProductos';
-import EditarProductos from './pages/EditarProductos'; // IMPORTADO
+import EditarProductos from './pages/EditarProductos';
 import ListarU from './pages/ListarU';
 import AgregarU from './pages/AgregarU';
 import EditarU from './pages/EditarU';
@@ -36,6 +36,7 @@ function App() {
   const [carrito, setCarrito] = useState([]);
   const location = useLocation();
 
+  // Cargar lista global de productos desde la API de Django
   const cargarProductos = () => {
     axios.get(`${API_URL}/api/productos/`)
       .then(res => setProductos(res.data))
@@ -45,6 +46,46 @@ function App() {
   useEffect(() => {
     cargarProductos();
   }, []);
+
+  // ============================================================
+  // FUNCIONES PARA CONTROLAR EL CARRITO DE COMPRAS
+  // ============================================================
+  const agregarAlCarrito = (producto) => {
+    setCarrito(prevCarrito => {
+      const existe = prevCarrito.find(item => item.id === producto.id);
+      if (existe) {
+        return prevCarrito.map(item =>
+          item.id === producto.id
+            ? { ...item, cantidad: (item.cantidad || 1) + 1 }
+            : item
+        );
+      }
+      return [...prevCarrito, { ...producto, cantidad: 1 }];
+    });
+    alert(`¡${producto.name || 'Producto'} añadido al carrito! 🛒`);
+  };
+
+  const eliminarDelCarrito = (id) => {
+    setCarrito(prevCarrito => prevCarrito.filter(item => item.id !== id));
+  };
+
+  const cambiarCantidad = (id, nuevaCantidad) => {
+    if (nuevaCantidad <= 0) {
+      eliminarDelCarrito(id);
+      return;
+    }
+    setCarrito(prevCarrito =>
+      prevCarrito.map(item =>
+        item.id === id ? { ...item, cantidad: nuevaCantidad } : item
+      )
+    );
+  };
+
+  const vaciarCarrito = () => {
+    if (window.confirm('¿Deseas vaciar todo el carrito?')) {
+      setCarrito([]);
+    }
+  };
 
   const totalUnidadesCarrito = carrito.reduce((acc, item) => acc + (item.cantidad || 1), 0);
 
@@ -91,10 +132,17 @@ function App() {
 
       <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px', flex: 1, width: '100%', boxSizing: 'border-box' }}>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/productos" element={<Productos productos={productos} />} />
-          <Route path="/producto/:id" element={<DetalleProducto productos={productos} />} />
-          <Route path="/carrito" element={<Carrito carrito={carrito} />} />
+          <Route path="/" element={<Home agregarAlCarrito={agregarAlCarrito} />} />
+          <Route path="/productos" element={<Productos productos={productos} agregarAlCarrito={agregarAlCarrito} />} />
+          <Route path="/producto/:id" element={<DetalleProducto productos={productos} agregarAlCarrito={agregarAlCarrito} />} />
+          <Route path="/carrito" element={
+            <Carrito 
+              carrito={carrito} 
+              eliminarDelCarrito={eliminarDelCarrito} 
+              cambiarCantidad={cambiarCantidad} 
+              vaciarCarrito={vaciarCarrito} 
+            />
+          } />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/contacto" element={<Contacto />} />
