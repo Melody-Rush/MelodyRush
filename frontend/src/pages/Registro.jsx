@@ -4,6 +4,9 @@ import axios from 'axios';
 import { regionesComunas } from '../utils/regionesComunas';
 import './css/Auth.css';
 
+// Apunta a la API de Render en producción y a localhost durante desarrollo
+const API_URL = process.env.REACT_APP_API_URL || 'https://melody-rush-backend.onrender.com';
+
 function Registro() {
   const [form, setForm] = useState({
     run: '',
@@ -16,7 +19,7 @@ function Registro() {
     confirmarPassword: '',
     region: '',
     comuna: '',
-    direccion: '' // NUEVO CAMPO: Dirección
+    direccion: ''
   });
 
   const [comunasDisponibles, setComunasDisponibles] = useState([]);
@@ -104,7 +107,7 @@ function Registro() {
     setErrores(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      axios.post('http://127.0.0.1:8000/api/usuarios/', form)
+      axios.post(`${API_URL}/api/usuarios/`, form)
         .then(() => {
           alert('¡Registro realizado con éxito! Ahora puedes iniciar sesión.');
           setForm({
@@ -312,7 +315,6 @@ function Registro() {
           </div>
         </div>
 
-        {/* CAMPO DE DIRECCIÓN */}
         <div className="campos">
           <label htmlFor="direccionRegistro">DIRECCIÓN</label>
           <input
