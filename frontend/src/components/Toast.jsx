@@ -6,7 +6,7 @@ function Toast({ mensaje, visible }) {
   return (
     <div style={{
       position: 'fixed',
-      top: '20px',
+      top: '90px',
       right: '20px',
       backgroundColor: '#57249a',
       color: '#fffafa',

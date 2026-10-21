@@ -13,18 +13,18 @@ function ConfirmacionPago() {
         setCompra(JSON.parse(datosGuardados));
       }
     } catch (err) {
-      console.error('Error al leer el resumen de compra:', err);
+      console.error('Error al cargar la compra:', err);
     }
   }, []);
 
   if (!compra || !Array.isArray(compra.productos)) {
     return (
       <div style={{ textAlign: 'center', padding: '60px 20px', backgroundColor: '#fff', borderRadius: '15px', maxWidth: '600px', margin: '40px auto', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
-        <h2 style={{ color: '#1e1b4b' }}>No hay resumen de compra activo</h2>
-        <p style={{ color: '#6b7280', margin: '15px 0 25px 0' }}>Parece que aún no has completado un pago reciente.</p>
+        <h2 style={{ color: '#1e1b4b' }}>No hay un comprobante activo</h2>
+        <p style={{ color: '#6b7280', margin: '15px 0 25px 0' }}>Realiza una compra para ver los detalles aquí.</p>
         <Link to="/productos">
           <button style={{ backgroundColor: '#a855f7', color: '#fff', border: 'none', padding: '12px 25px', borderRadius: '25px', fontWeight: 'bold', cursor: 'pointer' }}>
-            Explorar Productos 🛍️
+            Ir al catálogo 🛍️
           </button>
         </Link>
       </div>
@@ -39,14 +39,14 @@ function ConfirmacionPago() {
         </div>
         <h1 style={{ color: '#1e1b4b', margin: '0 0 10px 0' }}>¡PAGO CONFIRMADO!</h1>
         <p style={{ color: '#4b5563', fontSize: '1.05rem', margin: 0 }}>
-          Gracias por tu compra en <strong>Melody Rush</strong>. Hemos preparado el resumen de tu pedido.
+          Gracias por tu compra en <strong>Melody Rush</strong>.
         </p>
       </div>
 
       <div style={{ backgroundColor: '#f9fafb', padding: '20px', borderRadius: '12px', marginBottom: '25px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '15px' }}>
         <div>
           <small style={{ color: '#6b7280', display: 'block' }}>NÚMERO DE ORDEN</small>
-          <strong style={{ color: '#111827', fontSize: '1.1rem' }}>#{compra.ordenId || 'MR-000000'}</strong>
+          <strong style={{ color: '#111827', fontSize: '1.1rem' }}>#{compra.ordenId || 'MR-100000'}</strong>
         </div>
         <div>
           <small style={{ color: '#6b7280', display: 'block' }}>FECHA</small>

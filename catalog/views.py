@@ -51,10 +51,13 @@ def registro_view(request):
 
 # --- AUTENTICACIÓN / LOGIN ---
 
-@api_view(['POST'])
+@api_view(['POST', 'OPTIONS'])  # <--- Agregado 'OPTIONS' para responder a la verificación CORS
 @permission_classes([AllowAny])
-@authentication_classes([])  # Desactiva verificación CSRF/Sesión
+@authentication_classes([])     # Desactiva verificación CSRF/Sesión
 def api_login(request):
+    if request.method == 'OPTIONS':
+        return Response(status=status.HTTP_200_OK)
+
     datos = request.data
     identificador = (datos.get('username') or datos.get('correo') or datos.get('run') or '').strip()
     password = datos.get('password', '')
@@ -67,11 +70,11 @@ def api_login(request):
                   User.objects.filter(email__iexact=identificador).first()
 
     if usuario_obj:
-        # 2. Valida la contraseña (soporta encriptada con check_password Y texto plano)
+        # 2. Valida la contraseña (encriptada o en texto plano)
         es_valida = usuario_obj.check_password(password) or (usuario_obj.password == password)
 
         if es_valida:
-            # Si estaba en texto plano, la encripta automáticamente para el futuro
+            # Si estaba en texto plano, la encripta automáticamente
             if usuario_obj.password == password:
                 usuario_obj.set_password(password)
                 usuario_obj.save()
@@ -87,7 +90,6 @@ def api_login(request):
             }, status=status.HTTP_200_OK)
 
     return Response({'error': 'Credenciales inválidas. Revisa tu usuario/correo y contraseña.'}, status=status.HTTP_401_UNAUTHORIZED)
-
 # --- PRODUCTOS ---
 
 @api_view(['GET', 'POST'])
