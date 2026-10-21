@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate  # IMPORTANTE: para validar contraseña
 from .models import Product
 from .serializers import ProductSerializer
 
@@ -47,6 +48,36 @@ def registro_view(request):
 # ==========================================
 # 2. ENDPOINTS PARA REACT (API - JSON)
 # ==========================================
+
+# --- AUTENTICACIÓN / LOGIN ---
+
+@api_view(['POST'])
+def api_login(request):
+    identificador = request.data.get('username', '').strip()  # Puede ser RUN o Correo
+    password = request.data.get('password', '')
+
+    if not identificador or not password:
+        return Response({'error': 'Debes ingresar RUN/Correo y contraseña.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    # 1. Buscar si coincide con el username (RUN) o con el email (Correo)
+    usuario_obj = User.objects.filter(username__iexact=identificador).first() or \
+                  User.objects.filter(email__iexact=identificador).first()
+
+    # 2. Si el usuario existe, autenticar con su username real y contraseña
+    if usuario_obj:
+        user = authenticate(username=usuario_obj.username, password=password)
+        if user:
+            return Response({
+                'id': user.id,
+                'username': user.username,
+                'email': user.email,
+                'first_name': user.first_name,
+                'is_staff': user.is_staff,
+                'token': 'token-login-exitoso'
+            }, status=status.HTTP_200_OK)
+
+    return Response({'error': 'Credenciales inválidas. Revisa tu usuario/correo y contraseña.'}, status=status.HTTP_401_UNAUTHORIZED)
+
 
 # --- PRODUCTOS ---
 

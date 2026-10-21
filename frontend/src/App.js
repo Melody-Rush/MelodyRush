@@ -7,6 +7,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import RutaProtegidaAdmin from './components/RutaProtegidaAdmin';
+import MusicaFondo from './components/MusicaFondo'; // IMPORTADO
 
 // Páginas Públicas (Cliente)
 import Home from './pages/Home';
@@ -150,6 +151,9 @@ function App() {
           <Route path="/registro" element={<Registro />} />
         </Routes>
       </main>
+
+      {/* REPRODUCTOR FLOTANTE DE MÚSICA DE FONDO */}
+      <MusicaFondo />
 
       <Footer />
     </div>
