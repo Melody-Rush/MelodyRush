@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate  # IMPORTANTE: para validar contraseña
 from .models import Product
 from .serializers import ProductSerializer
 
@@ -52,29 +52,31 @@ def registro_view(request):
 # --- AUTENTICACIÓN / LOGIN ---
 
 @api_view(['POST'])
+@permission_classes([AllowAny])
+@authentication_classes([])  # <--- DESACTIVA CSRF Y SESIÓN PARA PERMITIR LOGIN DESDE REACT
 def api_login(request):
-    identificador = request.data.get('username', '').strip()  # Puede ser RUN o Correo
-    password = request.data.get('password', '')
+    datos = request.data
+    identificador = (datos.get('username') or datos.get('correo') or datos.get('run') or '').strip()
+    password = datos.get('password', '')
 
     if not identificador or not password:
         return Response({'error': 'Debes ingresar RUN/Correo y contraseña.'}, status=status.HTTP_400_BAD_REQUEST)
 
-    # 1. Buscar si coincide con el username (RUN) o con el email (Correo)
+    # 1. Busca coincidencia sin importar mayúsculas/minúsculas por RUN (username) o Correo (email)
     usuario_obj = User.objects.filter(username__iexact=identificador).first() or \
                   User.objects.filter(email__iexact=identificador).first()
 
-    # 2. Si el usuario existe, autenticar con su username real y contraseña
-    if usuario_obj:
-        user = authenticate(username=usuario_obj.username, password=password)
-        if user:
-            return Response({
-                'id': user.id,
-                'username': user.username,
-                'email': user.email,
-                'first_name': user.first_name,
-                'is_staff': user.is_staff,
-                'token': 'token-login-exitoso'
-            }, status=status.HTTP_200_OK)
+    # 2. Compara la contraseña encriptada directamente en la base de datos
+    if usuario_obj and usuario_obj.check_password(password):
+        return Response({
+            'id': usuario_obj.id,
+            'username': usuario_obj.username,
+            'email': usuario_obj.email,
+            'first_name': usuario_obj.first_name,
+            'last_name': usuario_obj.last_name,
+            'is_staff': usuario_obj.is_staff,
+            'token': 'token-login-exitoso'
+        }, status=status.HTTP_200_OK)
 
     return Response({'error': 'Credenciales inválidas. Revisa tu usuario/correo y contraseña.'}, status=status.HTTP_401_UNAUTHORIZED)
 
@@ -137,21 +139,21 @@ def api_usuarios(request):
         
     elif request.method == 'POST':
         datos = request.data
-        username = datos.get('run') or datos.get('correo')
+        username = (datos.get('run') or datos.get('correo') or '').strip()
         password = datos.get('password')
         
         if not username or not password:
             return Response({'error': 'RUN y contraseña son obligatorios.'}, status=status.HTTP_400_BAD_REQUEST)
         
-        if User.objects.filter(username=username).exists():
+        if User.objects.filter(username__iexact=username).exists():
             return Response({'run': ['Ya existe un usuario con este RUN/Usuario.']}, status=status.HTTP_400_BAD_REQUEST)
         
         user = User.objects.create_user(
             username=username,
-            email=datos.get('correo', ''),
+            email=datos.get('correo', '').strip(),
             password=password,
-            first_name=datos.get('nombre', ''),
-            last_name=datos.get('apellidos', '')
+            first_name=datos.get('nombre', '').strip(),
+            last_name=datos.get('apellidos', '').strip()
         )
         
         return Response({

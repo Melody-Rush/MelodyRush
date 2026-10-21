@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 import SidebarAdmin from '../components/SidebarAdmin';
 import { regionesComunas } from '../utils/regionesComunas';
 import './css/Admin.css';
+
+const API_URL = process.env.REACT_APP_API_URL || 'https://melodyrush.onrender.com';
 
 function EditarU() {
   const { id } = useParams();
@@ -24,23 +27,39 @@ function EditarU() {
 
   const [comunasDisponibles, setComunasDisponibles] = useState([]);
   const [errores, setErrores] = useState({});
+  const [cargando, setCargando] = useState(true);
 
+  // Cargar datos del usuario desde la base de datos de Django
   useEffect(() => {
-    const idx = id !== undefined ? Number(id) : localStorage.getItem('indiceUsuarioEditar');
-    const lista = JSON.parse(localStorage.getItem('misUsuarios')) || [];
-    const u = lista[idx];
+    if (id) {
+      axios.get(`${API_URL}/api/usuarios/${id}/`)
+        .then(res => {
+          const u = res.data;
+          setForm({
+            run: u.run || '',
+            nombre: u.nombre || '',
+            apellidos: u.apellidos || '',
+            correo: u.correo || '',
+            fechaNacimiento: u.fechaNacimiento || '',
+            telefono: u.telefono || '',
+            password: '',
+            confirmar: '',
+            region: u.region || '',
+            comuna: u.comuna || '',
+            direccion: u.direccion || ''
+          });
 
-    if (!u) {
-      alert('No se encontró el usuario a editar.');
-      navigate('/admin/usuarios');
-      return;
-    }
-
-    setForm({ ...u, confirmar: u.password || '' });
-
-    if (u.region) {
-      const reg = regionesComunas.find((item) => item.region === u.region);
-      setComunasDisponibles(reg ? reg.comunas : []);
+          if (u.region) {
+            const reg = regionesComunas.find((item) => item.region === u.region);
+            setComunasDisponibles(reg ? reg.comunas : []);
+          }
+          setCargando(false);
+        })
+        .catch(err => {
+          console.error('Error al cargar datos del usuario:', err);
+          alert('No se pudo cargar la información del usuario desde la base de datos.');
+          navigate('/admin/usuarios');
+        });
     }
   }, [id, navigate]);
 
@@ -69,7 +88,7 @@ function EditarU() {
       errs.correo = 'Solo se permiten correos @duoc.cl, @profesor.duoc.cl o @gmail.com.';
     }
 
-    if (!form.password || form.password.length < 4 || form.password.length > 10) {
+    if (form.password && (form.password.length < 4 || form.password.length > 10)) {
       errs.password = 'La contraseña debe tener entre 4 y 10 caracteres.';
     }
 
@@ -81,15 +100,21 @@ function EditarU() {
     setErrores(errs);
 
     if (Object.keys(errs).length === 0) {
-      const idx = id !== undefined ? Number(id) : localStorage.getItem('indiceUsuarioEditar');
-      let lista = JSON.parse(localStorage.getItem('misUsuarios')) || [];
-      lista[idx] = form;
-      localStorage.setItem('misUsuarios', JSON.stringify(lista));
-
-      alert('¡Usuario actualizado correctamente!');
-      navigate('/admin/usuarios');
+      axios.put(`${API_URL}/api/usuarios/${id}/`, form)
+        .then(() => {
+          alert('¡Usuario actualizado correctamente en la base de datos!');
+          navigate('/admin/usuarios');
+        })
+        .catch(err => {
+          console.error('Error al actualizar usuario:', err);
+          alert('Error al guardar los cambios en el servidor.');
+        });
     }
   };
+
+  if (cargando) {
+    return <div style={{ textAlign: 'center', padding: '50px' }}>Cargando datos del usuario...</div>;
+  }
 
   return (
     <div className="contenedor-pagina">
@@ -124,8 +149,8 @@ function EditarU() {
             <label htmlFor="telefonoRegistro">Teléfono (opcional)</label>
             <input type="tel" id="telefonoRegistro" name="telefono" value={form.telefono} onChange={handleChange} />
 
-            <label htmlFor="passwordRegistro">Contraseña</label>
-            <input type="password" id="passwordRegistro" name="password" value={form.password} onChange={handleChange} className={errores.password ? 'input-error' : ''} />
+            <label htmlFor="passwordRegistro">Nueva Contraseña (Opcional)</label>
+            <input type="password" id="passwordRegistro" name="password" value={form.password} onChange={handleChange} className={errores.password ? 'input-error' : ''} placeholder="Dejar en blanco para no cambiar" />
             <small className="mserror">{errores.password}</small>
 
             <label htmlFor="confirmarRegistro">Confirmar Contraseña</label>

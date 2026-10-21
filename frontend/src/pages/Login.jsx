@@ -27,7 +27,7 @@ function Login() {
     setErrores(nuevoserrores);
 
     if (Object.keys(nuevoserrores).length === 0) {
-      // 1. VERIFICACIÓN DE CREDENCIALES DE ADMINISTRADOR
+      // 1. VERIFICACIÓN DE CREDENCIALES DE ADMINISTRADOR DEMO
       const esAdminUser = usuarioLimpio === 'Admin-Rush' || usuarioLimpio === 'Admin Rush' || usuarioLimpio.toLowerCase() === 'admin';
       const esAdminPass = contrasena === '12345678m';
 
@@ -44,7 +44,7 @@ function Login() {
         return;
       }
 
-      // 2. PETICIÓN A LA API DE DJANGO (Para usuarios normales y API activa)
+      // 2. PETICIÓN A LA API DE DJANGO EN RENDER
       axios.post(`${API_URL}/api/login/`, {
         username: usuarioLimpio,
         password: contrasena
@@ -58,13 +58,15 @@ function Login() {
           alert('¡Bienvenido al Panel de Administración!');
           navigate('/admin');
         } else {
-          alert('¡Inicio de sesión exitoso!');
+          alert(`¡Bienvenido ${usuarioData.first_name || usuarioData.username}!`);
           navigate('/');
         }
       })
       .catch(err => {
         console.error('Error al iniciar sesión:', err);
-        setErrores({ backend: 'Credenciales inválidas o el servidor backend no respondió.' });
+        // Captura tanto error personalizado como detail de Django REST
+        const msj = err.response?.data?.error || err.response?.data?.detail || 'Credenciales inválidas o el servidor backend no respondió.';
+        setErrores({ backend: msj });
       });
     }
   };
@@ -95,7 +97,7 @@ function Login() {
               value={correo}
               onChange={(e) => setCorreo(e.target.value)}
               className={errores.correo ? 'input-error' : ''}
-              placeholder="correo@gmail.cl"
+              placeholder="correo@gmail.com o 12345678K"
             />
             <span className="mserror" id="errorCorreoLogin">
               {errores.correo && `⚠️ ${errores.correo}`}

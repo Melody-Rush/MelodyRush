@@ -7,7 +7,8 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import RutaProtegidaAdmin from './components/RutaProtegidaAdmin';
-import MusicaFondo from './components/MusicaFondo'; // IMPORTADO
+import MusicaFondo from './components/MusicaFondo';
+import Toast from './components/Toast'; // IMPORTADO TOAST
 
 // Páginas Públicas (Cliente)
 import Home from './pages/Home';
@@ -19,6 +20,7 @@ import Blogs from './pages/Blogs';
 import Contacto from './pages/Contacto';
 import Login from './pages/Login';
 import Registro from './pages/Registro';
+import ConfirmacionPago from './pages/ConfirmacionPago';
 
 // Páginas Administrador
 import HomeAd from './pages/HomeAd';
@@ -29,15 +31,26 @@ import ListarU from './pages/ListarU';
 import AgregarU from './pages/AgregarU';
 import EditarU from './pages/EditarU';
 
-// Constante para la URL del Backend (Render / Producción)
 const API_URL = process.env.REACT_APP_API_URL || 'https://melodyrush.onrender.com';
 
 function App() {
   const [productos, setProductos] = useState([]);
   const [carrito, setCarrito] = useState([]);
+  
+  // ESTADOS PARA LA NOTIFICACIÓN TOAST
+  const [toastMsg, setToastMsg] = useState('');
+  const [toastVisible, setToastVisible] = useState(false);
+
   const location = useLocation();
 
-  // Cargar lista global de productos desde la API de Django
+  const mostrarNotificacion = (mensaje) => {
+    setToastMsg(mensaje);
+    setToastVisible(true);
+    setTimeout(() => {
+      setToastVisible(false);
+    }, 3000);
+  };
+
   const cargarProductos = () => {
     axios.get(`${API_URL}/api/productos/`)
       .then(res => setProductos(res.data))
@@ -49,7 +62,7 @@ function App() {
   }, []);
 
   // ============================================================
-  // FUNCIONES PARA CONTROLAR EL CARRITO DE COMPRAS
+  // FUNCIONES PARA CONTROLAR EL CARRITO CON TOAST
   // ============================================================
   const agregarAlCarrito = (producto) => {
     setCarrito(prevCarrito => {
@@ -63,11 +76,14 @@ function App() {
       }
       return [...prevCarrito, { ...producto, cantidad: 1 }];
     });
-    alert(`¡${producto.name || 'Producto'} añadido al carrito! 🛒`);
+    
+    // Notificación Toast en lugar de alert()
+    mostrarNotificacion(`¡${producto.name || 'Producto'} añadido al carrito! 🛒`);
   };
 
   const eliminarDelCarrito = (id) => {
     setCarrito(prevCarrito => prevCarrito.filter(item => item.id !== id));
+    mostrarNotificacion('Producto eliminado del carrito 🗑️');
   };
 
   const cambiarCantidad = (id, nuevaCantidad) => {
@@ -83,50 +99,26 @@ function App() {
   };
 
   const vaciarCarrito = () => {
-    if (window.confirm('¿Deseas vaciar todo el carrito?')) {
-      setCarrito([]);
-    }
+    setCarrito([]);
   };
 
   const totalUnidadesCarrito = carrito.reduce((acc, item) => acc + (item.cantidad || 1), 0);
-
-  // Detecta si estamos en una ruta de administración
   const esRutaAdmin = location.pathname.startsWith('/admin');
 
-  // ============================================================
-  // 1. VISTAS ADMINISTRADOR (PANTALLA COMPLETA SIN NAVBAR DE CLIENTE)
-  // ============================================================
   if (esRutaAdmin) {
     return (
       <Routes>
-        <Route path="/admin" element={
-          <RutaProtegidaAdmin><HomeAd /></RutaProtegidaAdmin>
-        } />
-        <Route path="/admin/productos" element={
-          <RutaProtegidaAdmin><ListarProductos productos={productos} recargarProductos={cargarProductos} /></RutaProtegidaAdmin>
-        } />
-        <Route path="/admin/productos/agregar" element={
-          <RutaProtegidaAdmin><AgregarProductos recargarProductos={cargarProductos} /></RutaProtegidaAdmin>
-        } />
-        <Route path="/admin/productos/editar/:id" element={
-          <RutaProtegidaAdmin><EditarProductos recargarProductos={cargarProductos} /></RutaProtegidaAdmin>
-        } />
-        <Route path="/admin/usuarios" element={
-          <RutaProtegidaAdmin><ListarU /></RutaProtegidaAdmin>
-        } />
-        <Route path="/admin/usuarios/agregar" element={
-          <RutaProtegidaAdmin><AgregarU /></RutaProtegidaAdmin>
-        } />
-        <Route path="/admin/usuarios/editar/:id" element={
-          <RutaProtegidaAdmin><EditarU /></RutaProtegidaAdmin>
-        } />
+        <Route path="/admin" element={<RutaProtegidaAdmin><HomeAd /></RutaProtegidaAdmin>} />
+        <Route path="/admin/productos" element={<RutaProtegidaAdmin><ListarProductos productos={productos} recargarProductos={cargarProductos} /></RutaProtegidaAdmin>} />
+        <Route path="/admin/productos/agregar" element={<RutaProtegidaAdmin><AgregarProductos recargarProductos={cargarProductos} /></RutaProtegidaAdmin>} />
+        <Route path="/admin/productos/editar/:id" element={<RutaProtegidaAdmin><EditarProductos recargarProductos={cargarProductos} /></RutaProtegidaAdmin>} />
+        <Route path="/admin/usuarios" element={<RutaProtegidaAdmin><ListarU /></RutaProtegidaAdmin>} />
+        <Route path="/admin/usuarios/agregar" element={<RutaProtegidaAdmin><AgregarU /></RutaProtegidaAdmin>} />
+        <Route path="/admin/usuarios/editar/:id" element={<RutaProtegidaAdmin><EditarU /></RutaProtegidaAdmin>} />
       </Routes>
     );
   }
 
-  // ============================================================
-  // 2. VISTAS PÚBLICAS (CON NAVBAR Y FOOTER DE CLIENTE)
-  // ============================================================
   return (
     <div style={{ backgroundColor: '#f4f5f7', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Navbar totalUnidadesCarrito={totalUnidadesCarrito} />
@@ -144,6 +136,7 @@ function App() {
               vaciarCarrito={vaciarCarrito} 
             />
           } />
+          <Route path="/confirmacion-pago" element={<ConfirmacionPago />} />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/contacto" element={<Contacto />} />
@@ -152,7 +145,8 @@ function App() {
         </Routes>
       </main>
 
-      {/* REPRODUCTOR FLOTANTE DE MÚSICA DE FONDO */}
+      {/* NOTIFICACIÓN TOAST Y MÚSICA DE FONDO */}
+      <Toast mensaje={toastMsg} visible={toastVisible} />
       <MusicaFondo />
 
       <Footer />
