@@ -7,17 +7,26 @@ function ConfirmacionPago() {
   const [compra, setCompra] = useState(null);
 
   useEffect(() => {
-    const datosGuardados = localStorage.getItem('ultimaCompra');
-    if (datosGuardados) {
-      setCompra(JSON.parse(datosGuardados));
+    try {
+      const datosGuardados = localStorage.getItem('ultimaCompra');
+      if (datosGuardados) {
+        setCompra(JSON.parse(datosGuardados));
+      }
+    } catch (err) {
+      console.error('Error al leer el resumen de compra:', err);
     }
   }, []);
 
-  if (!compra) {
+  if (!compra || !Array.isArray(compra.productos)) {
     return (
-      <div style={{ textAlign: 'center', padding: '60px 20px' }}>
-        <h2>No hay detalles de compra recientes.</h2>
-        <Link to="/productos" style={{ color: '#a855f7', fontWeight: 'bold' }}>Ir a la tienda</Link>
+      <div style={{ textAlign: 'center', padding: '60px 20px', backgroundColor: '#fff', borderRadius: '15px', maxWidth: '600px', margin: '40px auto', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
+        <h2 style={{ color: '#1e1b4b' }}>No hay resumen de compra activo</h2>
+        <p style={{ color: '#6b7280', margin: '15px 0 25px 0' }}>Parece que aún no has completado un pago reciente.</p>
+        <Link to="/productos">
+          <button style={{ backgroundColor: '#a855f7', color: '#fff', border: 'none', padding: '12px 25px', borderRadius: '25px', fontWeight: 'bold', cursor: 'pointer' }}>
+            Explorar Productos 🛍️
+          </button>
+        </Link>
       </div>
     );
   }
@@ -30,23 +39,23 @@ function ConfirmacionPago() {
         </div>
         <h1 style={{ color: '#1e1b4b', margin: '0 0 10px 0' }}>¡PAGO CONFIRMADO!</h1>
         <p style={{ color: '#4b5563', fontSize: '1.05rem', margin: 0 }}>
-          Gracias por tu compra en <strong>Melody Rush</strong>. Hemos enviado el comprobante a tu correo.
+          Gracias por tu compra en <strong>Melody Rush</strong>. Hemos preparado el resumen de tu pedido.
         </p>
       </div>
 
       <div style={{ backgroundColor: '#f9fafb', padding: '20px', borderRadius: '12px', marginBottom: '25px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '15px' }}>
         <div>
           <small style={{ color: '#6b7280', display: 'block' }}>NÚMERO DE ORDEN</small>
-          <strong style={{ color: '#111827', fontSize: '1.1rem' }}>#{compra.ordenId}</strong>
+          <strong style={{ color: '#111827', fontSize: '1.1rem' }}>#{compra.ordenId || 'MR-000000'}</strong>
         </div>
         <div>
           <small style={{ color: '#6b7280', display: 'block' }}>FECHA</small>
-          <strong style={{ color: '#111827' }}>{compra.fecha}</strong>
+          <strong style={{ color: '#111827' }}>{compra.fecha || new Date().toLocaleDateString('es-CL')}</strong>
         </div>
         <div>
-          <small style={{ color: '#6b7280', display: 'block' }}>ESTADO DE ENTREGA</small>
-          <span style={{ backgroundColor: '#e0e7ff', color: '#4338ca', padding: '2px 10px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 'bold' }}>
-            📦 En Preparación
+          <small style={{ color: '#6b7280', display: 'block' }}>ENVÍO</small>
+          <span style={{ backgroundColor: compra.envioGratis ? '#dcfce7' : '#e0e7ff', color: compra.envioGratis ? '#15803d' : '#4338ca', padding: '2px 10px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 'bold' }}>
+            {compra.envioGratis ? '🚚 Envío Gratis' : '📦 Estándar'}
           </span>
         </div>
       </div>
@@ -56,34 +65,38 @@ function ConfirmacionPago() {
       </h3>
 
       <div style={{ marginBottom: '25px' }}>
-        {compra.productos.map(prod => (
-          <div key={prod.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid #f3f4f6' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <img 
-                src={
-                  prod.image 
-                    ? (prod.image.startsWith('http') ? prod.image : `${API_URL}${prod.image}`)
-                    : '/img/no-image.png'
-                } 
-                alt={prod.name} 
-                style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '6px' }} 
-              />
-              <div>
-                <h4 style={{ margin: 0, color: '#111827' }}>{prod.name}</h4>
-                <small style={{ color: '#6b7280' }}>Cantidad: {prod.cantidad}</small>
+        {compra.productos.map((prod, idx) => {
+          const precio = Number(prod.price) || 0;
+          const cantidad = Number(prod.cantidad) || 1;
+          const imgUrl = prod.image
+            ? (typeof prod.image === 'string' && prod.image.startsWith('http') ? prod.image : `${API_URL}${prod.image}`)
+            : '/img/no-image.png';
+
+          return (
+            <div key={prod.id || idx} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', borderBottom: '1px solid #f3f4f6' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <img 
+                  src={imgUrl} 
+                  alt={prod.name || 'Producto'} 
+                  style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '6px', border: '1px solid #eee' }} 
+                />
+                <div>
+                  <h4 style={{ margin: 0, color: '#111827' }}>{prod.name || 'Producto'}</h4>
+                  <small style={{ color: '#6b7280' }}>Cantidad: {cantidad}</small>
+                </div>
               </div>
+              <strong style={{ color: '#1e1b4b' }}>
+                ${(precio * cantidad).toLocaleString('es-CL')}
+              </strong>
             </div>
-            <strong style={{ color: '#1e1b4b' }}>
-              ${(Number(prod.price) * prod.cantidad).toLocaleString('es-CL')}
-            </strong>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '15px 0', borderTop: '2px solid #1e1b4b', marginBottom: '30px' }}>
         <span style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#111827' }}>TOTAL PAGADO:</span>
         <span style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#16a34a' }}>
-          ${Number(compra.total).toLocaleString('es-CL')}
+          ${Number(compra.total || 0).toLocaleString('es-CL')}
         </span>
       </div>
 

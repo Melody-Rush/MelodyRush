@@ -53,7 +53,7 @@ def registro_view(request):
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
-@authentication_classes([])  # <--- DESACTIVA CSRF Y SESIÓN PARA PERMITIR LOGIN DESDE REACT
+@authentication_classes([])  # Desactiva verificación CSRF/Sesión
 def api_login(request):
     datos = request.data
     identificador = (datos.get('username') or datos.get('correo') or datos.get('run') or '').strip()
@@ -62,24 +62,31 @@ def api_login(request):
     if not identificador or not password:
         return Response({'error': 'Debes ingresar RUN/Correo y contraseña.'}, status=status.HTTP_400_BAD_REQUEST)
 
-    # 1. Busca coincidencia sin importar mayúsculas/minúsculas por RUN (username) o Correo (email)
+    # 1. Busca coincidencia por RUN (username) o Correo (email)
     usuario_obj = User.objects.filter(username__iexact=identificador).first() or \
                   User.objects.filter(email__iexact=identificador).first()
 
-    # 2. Compara la contraseña encriptada directamente en la base de datos
-    if usuario_obj and usuario_obj.check_password(password):
-        return Response({
-            'id': usuario_obj.id,
-            'username': usuario_obj.username,
-            'email': usuario_obj.email,
-            'first_name': usuario_obj.first_name,
-            'last_name': usuario_obj.last_name,
-            'is_staff': usuario_obj.is_staff,
-            'token': 'token-login-exitoso'
-        }, status=status.HTTP_200_OK)
+    if usuario_obj:
+        # 2. Valida la contraseña (soporta encriptada con check_password Y texto plano)
+        es_valida = usuario_obj.check_password(password) or (usuario_obj.password == password)
+
+        if es_valida:
+            # Si estaba en texto plano, la encripta automáticamente para el futuro
+            if usuario_obj.password == password:
+                usuario_obj.set_password(password)
+                usuario_obj.save()
+
+            return Response({
+                'id': usuario_obj.id,
+                'username': usuario_obj.username,
+                'email': usuario_obj.email,
+                'first_name': usuario_obj.first_name,
+                'last_name': usuario_obj.last_name,
+                'is_staff': usuario_obj.is_staff,
+                'token': 'token-login-exitoso'
+            }, status=status.HTTP_200_OK)
 
     return Response({'error': 'Credenciales inválidas. Revisa tu usuario/correo y contraseña.'}, status=status.HTTP_401_UNAUTHORIZED)
-
 
 # --- PRODUCTOS ---
 
