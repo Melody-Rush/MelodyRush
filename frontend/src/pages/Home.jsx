@@ -29,8 +29,8 @@ function Home({ agregarAlCarrito }) {
       {/* BANNER PRINCIPAL (HERO) */}
       <section className="home">
         <div className="home-texto">
-          <h1>TIENDA ONLINE</h1>
-          <p>Encuentra lo que buscas....</p>
+          <h1>Melody Rushd</h1>
+          <p>Escucha lo mas destacado....</p>
           <Link to="/productos" className="boton-productos">⩢ ver productos</Link>
         </div>
         <div className="principal-imagen">
