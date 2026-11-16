@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axiosConfig';
 import SidebarAdmin from '../components/SidebarAdmin';
 import './css/Admin.css';
-
-const API_URL = process.env.REACT_APP_API_URL || 'https://melodyrush.onrender.com';
 
 function AgregarProductos({ recargarProductos }) {
   const [form, setForm] = useState({
@@ -13,44 +11,34 @@ function AgregarProductos({ recargarProductos }) {
     category: '',
     price: '',
     stock: '',
-    description: '' // NUEVO CAMPO: Descripción
+    description: ''
   });
-  
-  // Estado especial para guardar el archivo de la imagen
   const [imageFile, setImageFile] = useState(null);
-  
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Función que captura el archivo cuando lo seleccionas de tu PC
   const handleFileChange = (e) => {
     setImageFile(e.target.files[0]);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // FormData permite enviar archivos físicos junto con texto al backend
     const formData = new FormData();
     formData.append('code', form.code);
     formData.append('name', form.name);
     formData.append('category', form.category);
     formData.append('price', form.price);
     formData.append('stock', form.stock);
-    formData.append('description', form.description); // ENVIAMOS LA DESCRIPCIÓN
-    
+    formData.append('description', form.description);
     if (imageFile) {
-      formData.append('image', imageFile); 
+      formData.append('image', imageFile);
     }
 
-    // Header para el envío multipart/form-data
-    axios.post(`${API_URL}/api/productos/`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      }
+    api.post('/productos/', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
     })
       .then(() => {
         alert('¡Producto agregado correctamente!');
@@ -59,8 +47,7 @@ function AgregarProductos({ recargarProductos }) {
       })
       .catch((err) => {
         const detalleError = err.response ? err.response.data : 'Error de conexión con el servidor';
-        console.error('Error detallado de Django:', detalleError);
-        alert('Django dice: ' + JSON.stringify(detalleError));
+        alert('Error: ' + JSON.stringify(detalleError));
       });
   };
 
@@ -77,7 +64,6 @@ function AgregarProductos({ recargarProductos }) {
         <main>
           <div className="card-formulario">
             <form onSubmit={handleSubmit}>
-              
               <div className="grid-2-columnas">
                 <div className="grupo-campo">
                   <label htmlFor="code">Código del Producto *</label>
@@ -93,7 +79,7 @@ function AgregarProductos({ recargarProductos }) {
               <div className="grid-2-columnas">
                 <div className="grupo-campo">
                   <label htmlFor="category">Categoría *</label>
-                  <select id="category" name="category" value={form.category} onChange={handleChange} required >
+                  <select id="category" name="category" value={form.category} onChange={handleChange} required>
                     <option value="" disabled>Selecciona una categoría</option>
                     <option value="CD">CD</option>
                     <option value="Vinilo">Vinilo</option>
@@ -122,15 +108,14 @@ function AgregarProductos({ recargarProductos }) {
                 </div>
               </div>
 
-              {/* NUEVO CAMPO: DESCRIPCIÓN DEL PRODUCTO */}
               <div className="grupo-campo">
                 <label htmlFor="description">Descripción del Producto</label>
-                <textarea 
-                  id="description" 
-                  name="description" 
-                  rows="4" 
-                  placeholder="Escribe una breve descripción del producto, pista de canciones, edición, etc." 
-                  value={form.description} 
+                <textarea
+                  id="description"
+                  name="description"
+                  rows="4"
+                  placeholder="Escribe una breve descripción del producto, pista de canciones, edición, etc."
+                  value={form.description}
                   onChange={handleChange}
                   style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ccc', marginTop: '5px', fontFamily: 'inherit' }}
                 />

@@ -1,12 +1,23 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-function RutaProtegidaAdmin({ children }) {
+function RutaProtegidaAdmin({ children, soloAdmin = false }) {
   const usuarioGuardado = localStorage.getItem('usuario');
-  const usuario = usuarioGuardado ? JSON.parse(usuarioGuardado) : null;
+  const token = localStorage.getItem('access_token') || localStorage.getItem('token');
+  const usuario = usuarioGuardado && token ? JSON.parse(usuarioGuardado) : null;
 
-  if (!usuario || (!usuario.is_staff && usuario.username !== 'Admin-Rush')) {
+  if (!usuario) {
     return <Navigate to="/login" replace />;
+  }
+
+  const rol = usuario.rol || (usuario.is_staff ? 'ADMIN' : 'CLIENTE');
+
+  if (soloAdmin && rol !== 'ADMIN') {
+    return <Navigate to="/admin" replace />;
+  }
+
+  if (rol !== 'ADMIN' && rol !== 'VENDEDOR') {
+    return <Navigate to="/" replace />;
   }
 
   return children;

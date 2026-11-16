@@ -1,73 +1,59 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axiosConfig';
 import './css/Auth.css';
-
-const API_URL = process.env.REACT_APP_API_URL || 'https://melodyrush.onrender.com';
 
 function Login() {
   const [correo, setCorreo] = useState('');
   const [contrasena, setContrasena] = useState('');
   const [errores, setErrores] = useState({});
+  const [cargando, setCargando] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const nuevoserrores = {};
-
+    const nuevosErrores = {};
     const usuarioLimpio = correo.trim();
 
     if (!usuarioLimpio) {
-      nuevoserrores.correo = 'El correo o nombre de usuario es obligatorio.';
+      nuevosErrores.correo = 'El correo o nombre de usuario es obligatorio.';
     }
     if (!contrasena) {
-      nuevoserrores.contrasena = 'La contraseña es obligatoria.';
+      nuevosErrores.contrasena = 'La contraseña es obligatoria.';
     }
 
-    setErrores(nuevoserrores);
+    setErrores(nuevosErrores);
+    if (Object.keys(nuevosErrores).length > 0) return;
 
-    if (Object.keys(nuevoserrores).length === 0) {
-      // 1. VERIFICACIÓN DE CREDENCIALES DE ADMINISTRADOR DEMO
-      const esAdminUser = usuarioLimpio === 'Admin-Rush' || usuarioLimpio === 'Admin Rush' || usuarioLimpio.toLowerCase() === 'admin';
-      const esAdminPass = contrasena === '12345678m';
-
-      if (esAdminUser && esAdminPass) {
-        const adminData = {
-          username: 'Admin-Rush',
-          email: 'admin@melodyrush.cl',
-          is_staff: true
-        };
-        localStorage.setItem('token', 'token-admin-demo');
-        localStorage.setItem('usuario', JSON.stringify(adminData));
-        alert('¡Bienvenido al Panel de Administración!');
-        navigate('/admin');
-        return;
-      }
-
-      // 2. PETICIÓN A LA API DE DJANGO EN RENDER
-      axios.post(`${API_URL}/api/login/`, {
+    setCargando(true);
+    try {
+      const res = await api.post('/auth/login/', {
         username: usuarioLimpio,
-        password: contrasena
-      })
-      .then(res => {
-        const usuarioData = res.data;
-        localStorage.setItem('token', usuarioData.token || '');
-        localStorage.setItem('usuario', JSON.stringify(usuarioData));
-
-        if (usuarioData.is_staff || usuarioData.username === 'Admin-Rush') {
-          alert('¡Bienvenido al Panel de Administración!');
-          navigate('/admin');
-        } else {
-          alert(`¡Bienvenido ${usuarioData.first_name || usuarioData.username}!`);
-          navigate('/');
-        }
-      })
-      .catch(err => {
-        console.error('Error al iniciar sesión:', err);
-        // Captura tanto error personalizado como detail de Django REST
-        const msj = err.response?.data?.error || err.response?.data?.detail || 'Credenciales inválidas o el servidor backend no respondió.';
-        setErrores({ backend: msj });
+        password: contrasena,
       });
+
+      const usuarioData = res.data;
+
+      // Persistencia segura de sesión y tokens JWT
+      localStorage.setItem('access_token', usuarioData.access);
+      localStorage.setItem('refresh_token', usuarioData.refresh);
+      localStorage.setItem('token', usuarioData.access);
+      localStorage.setItem('usuario', JSON.stringify(usuarioData));
+
+      if (usuarioData.rol === 'ADMIN' || usuarioData.rol === 'VENDEDOR' || usuarioData.is_staff) {
+        navigate('/admin');
+      } else {
+        navigate('/');
+      }
+    } catch (err) {
+      console.error('Error al iniciar sesión:', err);
+      const msj =
+        err.response?.data?.error ||
+        err.response?.data?.detail ||
+        'Credenciales inválidas o el servidor no respondió.';
+      setErrores({ backend: msj });
+    } finally {
+      setCargando(false);
     }
   };
 
@@ -118,8 +104,8 @@ function Login() {
             </span>
           </div>
 
-          <button type="submit" className="btn-auth">
-            Iniciar sesión
+          <button type="submit" className="btn-auth" disabled={cargando}>
+            {cargando ? 'Validando...' : 'Iniciar sesión'}
           </button>
         </form>
 
